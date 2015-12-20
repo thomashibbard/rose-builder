@@ -8,6 +8,7 @@ http
 images
 images/*
 imagesArchive/*
+uploadedStaticImages/*
 exportedRosetta/*.js
 tests
 */**/*.css
