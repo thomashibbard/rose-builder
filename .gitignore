@@ -1,0 +1,15 @@
+#deps
+node_modules
+bower_components
+
+
+#other
+http
+images
+images/*
+imagesArchive/*
+exportedRosetta/*.js
+tests
+*/**/*.css
+
+*/**/*.scss

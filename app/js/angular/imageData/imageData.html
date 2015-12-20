@@ -1,0 +1,64 @@
+<div ng-controller="imageDataCtrl" class="image-data-container">
+  <div class="row">
+    <div class="four columns">
+      <span	class="u-full-width">
+        <label>
+          Data for Images in Directory
+        </label>
+      </span>
+    </div>
+    <div class="four columns">
+      <button class="u-full-width add-all-image"
+              ng-click="toggleImageBatchAll()">
+        {{allInBatch ? "Remove All from Batch" : "Add All to Batch"}}
+      </button>
+    </div>
+    <div class="four columns">
+      <button class="u-full-width add-all-image"
+              ng-click="toggleImageRequiredAll()">
+        {{allRequired ? "Remove All as Required" : "Add All as Required"}}
+      </button>
+    </div>
+  <hr style="border-bottom:1px solid black;" />
+  <div class="navbar-spacer navbar-spacer-thin"></div>
+  <div class="image-data-row" ng-repeat="image in $root.imageData">
+    <div class="row">
+      <div class="twelve columns">
+        <i>{{image.fileName}}</i>
+        <span class="image-data-dimensions"> ({{image.width}}px&times;{{image.height}}px) </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns">
+        &nbsp;
+      </div>
+      <div class="four columns">
+        <button class="u-full-width thin-button add-single-image-option" 
+        ng-click="toggleImageBatch($index)"
+        ng-class="{'active-image-option': $root.imageData[$index].inBatch}">
+          {{image.inBatch ? "REMOVE FROM BATCH" : "ADD TO BATCH"}}
+        </button>  
+      </div>
+      <div class="four columns">
+        <button class="u-full-width thin-button add-single-image-option" 
+        ng-click="toggleImageRequired($index)"
+        ng-class="{'active-image-option': $root.imageData[$index].isRequired}">
+          {{image.isRequired ? "REMOVE AS REQUIRED" : "ADD AS REQUIRED"}}
+        </button>  
+      </div>
+    </div>
+  </div>
+  <div class="navbar-spacer navbar-spacer-thick"></div>
+  <div class="row">
+    <div class="six columns">
+      <button class="u-full-width" ng-click="goToImageLocation()">
+        BACK
+      </button>
+    </div>
+    <div class="six columns">
+      <button class="u-full-width" ng-click="generateRosetta()">
+        Generate Rosetta
+      </button>
+    </div>
+  </div>
+</div>

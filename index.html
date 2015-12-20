@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="boilerplateApp">
+<head>
+	<title>Boilerplate Rosetta Objects</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<!-- bower:css -->
+	<link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css" />
+	<!-- endbower -->
+	<!-- inject:css -->
+	<link rel="stylesheet" href="/app/styles/css/styles.css">
+	<!-- endinject -->
+	<base href="/">
+</head>
+<body>
+	<div class="container" ng-controller="mainCtrl">
+		<section class="header">
+		<div class="title">
+		<h2>Download Boilerplate JS Objects</h2>	
+		</div>
+		</section>
+		<div class="navbar-spacer navbar-spacer-thick"></div>
+	<!-- 	<image-location ng-show="activeMenuIndex === 0" class="stage"></image-location>
+		<image-data ng-show="activeMenuIndex === 1" class="stage"></image-data> -->
+		<div id="main">
+			<div ng-view></div>
+		</div>
+	</div>
+</body>
+
+	<!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+	<!-- endbower -->
+	
+	<!-- inject:js -->
+	<script src="/app/app.js"></script>
+	<script src="/app/js/scripts.js"></script>
+	<script src="/app/js/nodeComponents/index.js"></script>
+	<script src="/app/js/nodeComponents/renameTest.js"></script>
+	<script src="/app/js/angular/downloadRosetta/downloadRosettaController.js"></script>
+	<script src="/app/js/angular/downloadRosetta/downloadRosettaDirective.js"></script>
+	<script src="/app/js/angular/fileRename/fileRenameController.js"></script>
+	<script src="/app/js/angular/fileRename/fileRenameDirective.js"></script>
+	<script src="/app/js/angular/imageData/imageDataController.js"></script>
+	<script src="/app/js/angular/imageData/imageDataDirective.js"></script>
+	<script src="/app/js/angular/imageLocation/imageLocationController.js"></script>
+	<script src="/app/js/angular/imageLocation/imageLocationDirective.js"></script>
+	<script src="/app/js/angular/main/mainController.js"></script>
+	<script src="/app/js/angular/services/getBoilerplateService.js"></script>
+	<script src="/app/js/angular/services/getImageDataService.js"></script>
+	<script src="/app/js/angular/uploadStaticImage/uploadStaticImageController.js"></script>
+	<script src="/app/js/angular/uploadStaticImage/uploadStaticImageDirective.js"></script>
+	<script src="/app/js/nodeComponents/boilerplateRosettaObj/boilerplateRosettaObj.js"></script>
+	<script src="/app/js/nodeComponents/generateRosetta/generateRosetta.js"></script>
+	<script src="/app/js/nodeComponents/getImageData/getImageData.js"></script>
+	<!-- endinject -->
+
+</html>
+
