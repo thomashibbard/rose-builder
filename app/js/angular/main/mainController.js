@@ -6,7 +6,7 @@ angular.module('boilerplateApp')
 		$scope.incrementActiveMenu = function(){
 			$scope.activeMenuIndex++;
 		};
-		$scope.srcDir = '/Users/thibbard/Documents/desktop backup/dev/nodeTest1/images';
+		$scope.srcDir = '/Users/thibbard/Documents/repos/projects/rose-builder/images';
 /*		$scope.getIt = function(){
 			console.log('hello', $scope.srcDir);
 			$http.get('http://localhost:8888/GetImageData/' + encodeURIComponent($scope.srcDir))

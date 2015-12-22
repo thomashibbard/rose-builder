@@ -9,7 +9,7 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
-app.set('view engine', 'jade');
+//app.set('view engine', 'jade');
 
 //custom modules
 var components = require('./app/js/nodeComponents/');
@@ -57,10 +57,10 @@ app.post('/generateRosetta/', cors(corsOptions), function(req, res, next){
 	//res.json({data: res});
 });
 
-var upload = multer({ dest: 'http://localhost:8888/uploadedStaticImages/'});
+var upload = multer({ dest: 'http://localhost:8888/uploadStaticImage/'});
 var type = upload.any();
 
-app.post('/uploadedStaticImages', type, function(req, res){
+app.post('/uploadStaticImage', type, function(req, res){
 	console.log('FILES', req.files[0].originalname)
 	res.json(req.files.file);
 
@@ -68,14 +68,15 @@ app.post('/uploadedStaticImages', type, function(req, res){
 
   /** The original name of the uploaded file
       stored in the variable "originalname". **/
-  var target_path = 'uploadedStaticImages/' + req.files[0].originalname;
-
+  var target_path = 'uploadedImages/' + req.files[0].originalname;
+  console.log('temp_path', tmp_path);
+  console.log('target_path', target_path);
   /** A better way to copy the uploaded file. **/
   var src = fs.createReadStream(tmp_path);
   var dest = fs.createWriteStream(target_path);
   src.pipe(dest);
-  src.on('end', function() { res.render('complete'); });
-  src.on('error', function(err) { res.render('error'); });
+  src.on('end', function() { console.log({status: 'complete'}); });
+  src.on('error', function(err) { console.log({status: 'error', error: err}); });
 
 });
 

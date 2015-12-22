@@ -1,17 +1,24 @@
 angular.module('boilerplateApp')
-	.controller('uploadStaticImageCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    .controller('uploadStaticImageCtrl', ['$scope', '$rootScope', 'Upload', '$timeout', '$location', function ($scope, $rootScope, Upload, $timeout, $location) {
     $scope.uploadFiles = function(file, errFiles) {
+        var host = 'http://localhost:8888';
+        var uploadRoutePath = 'uploadStaticImage';
+        var uploadDestPath = 'uploadedImages';
+
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
         if (file) {
             file.upload = Upload.upload({
-                url: 'http://localhost:8888/uploadedStaticImages',
+                url: host + '/' + uploadRoutePath,
                 data: {file: file}
             });
 
             file.upload.then(function (response) {
                 $timeout(function () {
                     file.result = response.data;
+                    $rootScope.staticImageName = $scope.f.name;
+                    $rootScope.staticImagePath = uploadDestPath + '/' + $scope.f.name;
+                    $location.path('/placeImages');
                 });
             }, function (response) {
                 if (response.status > 0)

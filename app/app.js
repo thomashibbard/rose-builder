@@ -26,6 +26,11 @@ angular.module('boilerplateApp', ['ngRoute', 'ngAnimate', 'ngFileUpload'])
 			controller:  'uploadStaticImageCtrl'
 		})
 
+		.when('/placeImages', {
+			templateUrl: '/app/js/angular/placeImages/placeImages.html',
+			controller: 'placeImagesCtrl'
+		});
+
 /*		.when('/fileRename', {
 			templateUrl: '/app/js/angular/fileRename/fileRename.html',
 			controller: 'fileRenameCtrl'

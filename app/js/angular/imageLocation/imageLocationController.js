@@ -4,7 +4,7 @@ angular.module('boilerplateApp')
 		$scope.bgScale = "cover"
 		$scope.directoryType = "size";
 		$scope.urlParams = $scope.bgScale + '/' + $scope.directoryType;
-		$scope.imageLocation = '/Users/thibbard/Documents/desktop backup/dev/nodeTest1/images';
+		$scope.imageLocation = '/Users/thibbard/Documents/repos/projects/rose-builder/images';
 
 		$scope.submitRosetta = function(){
 
@@ -26,7 +26,7 @@ angular.module('boilerplateApp')
 
 
 		$scope.getImageData = function() {
-			$http.get('http://localhost:8888/GetImageData/' + encodeURIComponent($scope.srcDir))
+			$http.get('http://localhost:8888/GetImageData/' + encodeURIComponent($scope.imageLocation))
 				.then(function(response) {
 					$rootScope.imageData = response.data.result;
 					$location.path('/imageData/');
