@@ -11,8 +11,11 @@ imagesArchive/*
 uploadedStaticImages/*
 exportedRosetta/*.js
 tests
+<<<<<<< HEAD
 
 .sass-cache
 .sass-cache/*
+=======
+>>>>>>> 06298d0026c221bbe99b498ffd919dd2cdf22cb5
 
 */**/*.scss
