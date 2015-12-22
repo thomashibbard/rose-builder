@@ -11,6 +11,5 @@ imagesArchive/*
 uploadedStaticImages/*
 exportedRosetta/*.js
 tests
-*/**/*.css
 
 */**/*.scss
