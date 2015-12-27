@@ -28,7 +28,11 @@ angular.module('boilerplateApp')
 
 		$rootScope.helpers = {};
 		$rootScope.helpers.resetHeight = function(){
-			$("html, body, .container").css("width", "100%");
+/*			var containerHeight = parseInt(jQuery(".container").css("height"), 10);
+			var rows = jQuery(".image-data-row");
+			var newHeight = containerHeight + parseInt(rows.eq(0).css("height"), 10) * rows.size() + 50;
+			jQuery(".container").css("height", newHeight)
+			console.log('resized')*/
 		};
 
 	});

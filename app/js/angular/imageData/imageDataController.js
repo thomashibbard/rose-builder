@@ -3,6 +3,9 @@ angular.module('boilerplateApp')
 
 		$scope.message = 'image data message';
 
+		$scope.toggleUseImage = function(index){
+			$rootScope.imageData[index].useImage = !$rootScope.imageData[index].useImage;
+		};
 		$scope.toggleImageBatch = function(index){
 			$rootScope.imageData[index].inBatch = !$rootScope.imageData[index].inBatch;
 		};

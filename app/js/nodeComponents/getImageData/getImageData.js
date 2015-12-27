@@ -28,14 +28,15 @@ async.waterfall([
 		var filePath = ''
 		async.each(files, function(file, cb){
 			filePath = path.join(srcDir, file);
-			sizeOf(filePath, function(err, dimensions){
+			sizeOf(filePath, function(err, imageDatum){
 				if (err){
 					console.log('sizeOf error', err);
 				}else{
-					dimensions.fileName = file;
-					dimensions.inBatch = false;
-					dimensions.isRequired = false;
-					imageData.push(dimensions);
+					imageDatum.fileName = file;
+					imageDatum.inBatch = false;
+					imageDatum.isRequired = false;
+					imageDatum.useImage = true;
+					imageData.push(imageDatum);
 					cb();
 				}
 			});

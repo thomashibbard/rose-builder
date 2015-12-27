@@ -21,7 +21,7 @@
     "angular-route": "~1.4.8",
     "bitters": "~1.1.0",
     "bourbon": "~4.2.6",
-    "font-awesome": "fontawesome#~4.5.0",
+    "components-font-awesome": "~4.5.0",
     "jquery": "~2.1.4",
     "neat": "~1.7.2",
     "ng-file-upload": "~10.1.9",

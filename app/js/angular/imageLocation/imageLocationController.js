@@ -29,6 +29,7 @@ angular.module('boilerplateApp')
 			$http.get('http://localhost:8888/GetImageData/' + encodeURIComponent($scope.imageLocation))
 				.then(function(response) {
 					$rootScope.imageData = response.data.result;
+					console.log(JSON.stringify($rootScope.imageData, null, '  '))
 					$location.path('/imageData/');
 					$rootScope.helpers.resetHeight();
 				}, function(response) {

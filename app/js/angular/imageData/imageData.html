@@ -21,7 +21,7 @@
     </div>
   <hr style="border-bottom:1px solid black;" />
   <div class="navbar-spacer navbar-spacer-thin"></div>
-  <div class="image-data-row" ng-repeat="image in $root.imageData">
+  <div class="image-data-row" ng-repeat="image in $root.imageData"  ng-class="{'even-row': $index%2==0, 'odd-row': $index%2!=0}">
     <div class="row">
       <div class="twelve columns">
         <i>{{image.fileName}}</i>
@@ -29,21 +29,35 @@
       </div>
     </div>
     <div class="row">
-      <div class="four columns">
+      <div class="three columns">
+        <button class="u-full-width thin-button add-single-image-option" 
+        ng-click="toggleUseImage($index)">
+          <div class="image-option-text">
+            {{image.useImage ? "REMOVE IMAGE" : "ADD IMAGE"}}
+          </div>
+          <i class="fa" ng-class="{'fa-times active-image-option': $root.imageData[$index].useImage, 'fa-plus inactive-image-option': !$root.imageData[$index].useImage}"></i>
+        </button>  
+      </div>
+      <div class="one columns">
         &nbsp;
       </div>
       <div class="four columns">
         <button class="u-full-width thin-button add-single-image-option" 
-        ng-click="toggleImageBatch($index)"
-        ng-class="{'active-image-option': $root.imageData[$index].inBatch}">
-          {{image.inBatch ? "REMOVE FROM BATCH" : "ADD TO BATCH"}}
+        ng-click="toggleImageBatch($index)">
+          <div class="image-option-text">
+            {{image.inBatch ? "REMOVE FROM BATCH" : "ADD TO BATCH"}}
+          </div>
+          <i class="fa" ng-class="{'fa-times active-image-option': $root.imageData[$index].inBatch, 'fa-plus inactive-image-option': !$root.imageData[$index].inBatch}"></i>
         </button>  
       </div>
       <div class="four columns">
         <button class="u-full-width thin-button add-single-image-option" 
-        ng-click="toggleImageRequired($index)"
-        ng-class="{'active-image-option': $root.imageData[$index].isRequired}">
-          {{image.isRequired ? "REMOVE AS REQUIRED" : "ADD AS REQUIRED"}}
+        ng-click="toggleImageRequired($index)">
+          <div class="image-option-text">
+           {{image.isRequired ? "REMOVE AS REQUIRED" : "ADD AS REQUIRED"}}
+          </div>
+        <i class="fa" ng-class="{'fa-times  active-image-option': $root.imageData[$index].isRequired, 'fa-plus inactive-image-option': !$root.imageData[$index].isRequired}"></i>
+
         </button>  
       </div>
     </div>

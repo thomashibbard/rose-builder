@@ -54,6 +54,9 @@
 	});
 
 	var filesToInject = ['./app/**/*.js', './app/**/*.css'];
+	//i've replaced this task with angularFilesort below
+	//I think that the syntax is much clearer
+	//TODO remove this and fix the wire-inject task to use `sort`
 	gulp.task('inject', function (){
 	  var target = gulp.src('./index.html');
 	  var sources = gulp.src(filesToInject, {read: false});
@@ -65,13 +68,32 @@
 	    sequence('wire', 'inject', callback);
 	});
 
-
+	gulp.task('sort', function(){
+		gulp.src('./index.html')
+	  	.pipe(inject(
+	    	gulp.src(['./app/**/*.js']).pipe(angularFilesort())
+	  	))
+	  	.pipe(gulp.dest('.'));
+	});
 
 
 	gulp.task('sass', function() {
 	    return sass('./app/styles/sass/**/*.scss', { style: 'expanded' })
 	        .pipe(gulp.dest('./app/styles/css/'));
 	});
+
+
+
+	gulp.task('watch-sass', function () {
+	    gulp.watch('./app/styles/sass/*.scss', ['sass']);
+	});
+
+
+
+
+
+
+
 	gulp.task('start-server', false, function(callback){
 		exec('node server.js', function(){
 			callback();
@@ -98,21 +120,6 @@
 	gulp.task('launch', function(callback){
 		sequence('connect', 'browser-open', callback);
 	});
-
-	/*gulp.task('watch', 'Watch for changes in SASS and custom JS', function (callback) {
-	    gulp.watch(filesToInject, ['inject']);
-	    gulp.watch('./scss/*.scss', ['sass']);
-	});*/
-
-
-gulp.task('sort', function(){
-gulp.src('./index.html')
-  .pipe(inject(
-    gulp.src(['./app/**/*.js']).pipe(angularFilesort())
-  ))
-  .pipe(gulp.dest('.'));
-
-});
 
 
 

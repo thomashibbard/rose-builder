@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,900,800,600,500,700,300,200,100);
+/*media query variables*/
 html, body, .container {
   background: #efefef;
   padding: 0;
@@ -14,6 +15,7 @@ html, body, .container {
   color: #555;
   padding: 8px 50px;
   margin-top: 0;
+  overflow: hidden;
 }
 .container .navbar-spacer {
   width: 100%;
@@ -50,7 +52,9 @@ html, body, .container {
   min-height: 60px;
 }
 .container .image-data-container .image-data-row {
-  border-bottom: 1px solid lightgray;
+  padding: 6px 11px 0px 11px;
+  border-radius: 3px;
+  border-bottom: 1px solid #E0E0E0;
 }
 .container .image-data-container .header {
   margin-bottom: 15px;
@@ -58,12 +62,39 @@ html, body, .container {
 .container .image-data-container .row {
   min-height: 30px;
 }
+.container .image-data-container .even-row {
+  /*  background-color: #efefef; */
+}
+.container .image-data-container .odd-row {
+  background-color: #efefef;
+}
 .container .image-data-container .add-single-image-option {
   color: #888686;
+  position: relative;
+}
+.container .image-data-container .image-option-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+.container .image-data-container .active-image-option,
+.container .image-data-container .inactive-image-option {
+  top: 50%;
+  float: right;
+  padding-right: 10px;
+  border-radius: 3px;
+  margin-right: -29px;
 }
 .container .image-data-container .active-image-option {
   color: #ffffff;
-  background-color: #44B344;
+  background-color: rgba(212, 66, 22, 0.45);
+  padding: 4px 5px 4px 6px;
+}
+.container .image-data-container .inactive-image-option {
+  color: #ffffff;
+  background-color: rgba(58, 156, 26, 0.52);
+  padding: 5px 5px 3px 6px;
 }
 
 .spa-anchor {
@@ -77,4 +108,11 @@ html, body, .container {
 .spa-anchor:active {
   color: unset;
   text-decoration: unset;
+}
+
+@media only screen and (max-device-width: 1000px) {
+  .image-option-text {
+    font-size: 8px !important;
+    margin-left: -7px;
+  }
 }
