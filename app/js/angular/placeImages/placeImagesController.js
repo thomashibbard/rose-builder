@@ -242,25 +242,19 @@ angular.module('boilerplateApp')
   		event.preventDefault();
   		var currentlyMoving = $scope.getCurrentlyMoving();
   		var currentlyMovingIndex = $scope.getCurrentlyMovingIndex();
-  		console.log(event);
   		var increment = event.shiftKey ? 10 : 1;
-
 			switch (event.which){
 				case 37:
 					$rootScope.imageData[currentlyMovingIndex].left -= increment;
-					console.log('left', $rootScope.imageData[currentlyMovingIndex].left);
 					break;
 				case 38:
 					$rootScope.imageData[currentlyMovingIndex].top -= increment;
-					console.log('top', $rootScope.imageData[currentlyMovingIndex].top);
 					break;
 				case 39:
 					$rootScope.imageData[currentlyMovingIndex].left += increment;
-					console.log('left', $rootScope.imageData[currentlyMovingIndex].left);
 					break;
 				case 40:
 					$rootScope.imageData[currentlyMovingIndex].top += increment;
-					console.log('top', $rootScope.imageData[currentlyMovingIndex].top);
 					break;
 				default:
 					console.log($rootScope.imageData[currentlyMovingIndex]);
