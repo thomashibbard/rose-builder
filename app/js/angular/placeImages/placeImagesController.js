@@ -249,6 +249,9 @@ angular.module('boilerplateApp')
   		var currentlyMoving = $scope.getCurrentlyMoving();
   		var currentlyMovingIndex = $scope.getCurrentlyMovingIndex();
   		var increment = event.shiftKey ? 10 : 1;
+  		var zIndexFlag; //TODO make some other alt-key adjust key press
+  										//and optionally display a modal that shows all
+  										//images z-indices as the arrows are pressed.
 			switch (event.which){
 				case 37:
 					$rootScope.imageData[currentlyMovingIndex].left -= increment;

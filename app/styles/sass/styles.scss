@@ -55,8 +55,17 @@ h6{
 	.header{
 	  margin-top: 9rem;
 	  text-align: center;
-    h2{
-      border-bottom: 1px solid #B53F14;
+    border-bottom: 1px solid #B53F14;
+    .title{
+      .rose, h2{
+        display: inline-block;
+      }
+      .rose{
+        width: 32px;
+        top: 1px;
+        position: relative;
+        margin-right: 2px;
+      }
     }
 	}
 
