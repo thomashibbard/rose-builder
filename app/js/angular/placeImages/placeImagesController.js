@@ -157,11 +157,20 @@ angular.module('boilerplateApp')
 		$scope.toggleSaturation = function(){
 			$scope.hideSaturationFlag = !$scope.hideSaturationFlag;
 		};
-
+	$scope.placeImageSelectFileName = function(index){
+		$scope.showPlaceholder(index);
+		$scope.setCurrentlyMoving(index);
+	}
 	$scope.getCurrentlyMoving = function(){
 		return $rootScope.imageData.filter(function(datum){
 				return datum.currentlyMoving === true;
 		})[0];		
+	};
+	$scope.setCurrentlyMoving = function(index){
+		$rootScope.imageData.forEach(function(datum){
+			datum.currentlyMoving = false;
+		});
+		$rootScope.imageData[index].currentlyMoving = true;
 	};
 	$scope.getCurrentlyMovingIndex = function(){
 		return _.findIndex($rootScope.imageData, function(datum){
@@ -185,10 +194,7 @@ angular.module('boilerplateApp')
 	  y_elem = y_pos - selected.offsetTop;
 	}
 	$scope.downInit = function(el, index){
-		$rootScope.imageData.forEach(function(datum){
-			datum.currentlyMoving = false;
-		});
-		$rootScope.imageData[index].currentlyMoving = true;
+		$scope.setCurrentlyMoving(index);
     _drag_init(el.target);
     return false;
 	};

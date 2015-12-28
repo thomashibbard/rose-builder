@@ -22,9 +22,9 @@
 			<div class="place-image-palette">
 				<h6>Images to Place</h6>
 				<button class="u-full-width thin-button"
-								ng-repeat="image in $root.imageData"
-								ng-class="{'active-image-button': image.placeholderShown}"
-					      ng-click="showPlaceholder($index)">
+						ng-repeat="image in $root.imageData"
+						ng-class="{'active-image-button': image.placeholderShown}"
+					    ng-click="placeImageSelectFileName($index)">
 					   <!--ng-style="{height: imageHeight}"-->
 					<span>
 					{{image.fileName}}
