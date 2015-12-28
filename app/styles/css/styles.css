@@ -45,16 +45,9 @@ h6 {
 .container .header {
   margin-top: 9rem;
   text-align: center;
+}
+.container .header h2 {
   border-bottom: 1px solid #B53F14;
-}
-.container .header .title .rose, .container .header .title h2 {
-  display: inline-block;
-}
-.container .header .title .rose {
-  width: 32px;
-  top: 1px;
-  position: relative;
-  margin-right: 2px;
 }
 .container .image-location-container .column,
 .container .image-location-container .columns {
