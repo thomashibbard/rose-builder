@@ -1,6 +1,7 @@
 {
-  "name": "imageboilerplate",
+  "name": "rose-builder",
   "version": "0.0.1",
+  "private": true,
   "description": "creates simple rosetta objects for images in a given directory",
   "main": "index.js",
   "scripts": {
@@ -12,7 +13,7 @@
   "dependencies": {
     "async": "^1.5.0",
     "body-parser": "^1.14.1",
-    "colors": "^1.1.2",
+    "chalk": "^1.1.1",
     "cors": "^2.7.1",
     "express": "^4.13.3",
     "fs-extra": "^0.26.2",

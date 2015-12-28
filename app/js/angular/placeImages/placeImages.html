@@ -1,4 +1,4 @@
-<div class="place-image-container">
+<div class="place-image-container" ng-mouseup="_destroy()">
 	<div class="row">
 		<div class="four columns u-full-width">
 			<label>
@@ -27,7 +27,9 @@
 			<div ng-repeat="image in $root.imageData" 
 					 ng-show="image.placeholderShown"
 					 ng-class="{'hide-bg-image': backgroundImageFlag}"
-					 ng-style="{width: image.width, height: image.height}"					 
+					 ng-style="{width: image.width, height: image.height}"
+					 ng-mousedown="downInit($event, $index)"
+					 ng-mousemove="_move_elem($event)"		 
 					 class="place-image-placeholder"
 					 style="background-image: url(./images/{{image.fileName}})">
 				<div class="filename-container">

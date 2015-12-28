@@ -10,7 +10,7 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": true
+				"placeholderShown": true
 		  },
 		  {
 		    "width": 107,
@@ -20,7 +20,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  },
 		  {
 		    "width": 160,
@@ -30,7 +31,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  },
 		  {
 		    "width": 160,
@@ -40,7 +42,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  },
 		  {
 		    "width": 159,
@@ -50,7 +53,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  },
 		  {
 		    "height": 600,
@@ -60,7 +64,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  },
 		  {
 		    "width": 200,
@@ -70,7 +75,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  },
 		  {
 		    "width": 160,
@@ -80,7 +86,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  },
 		  {
 		    "width": 104,
@@ -90,7 +97,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  },
 		  {
 		    "width": 139,
@@ -100,13 +108,13 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-			"placeholderShown": false
+				"placeholderShown": false,
+				"currentlyMoving": false
 		  }
 		];
 		$scope.backgroundImageFlag = true;
 		$scope.toggleBackgroundImage = function(){
 			$scope.backgroundImageFlag = !$scope.backgroundImageFlag;
-			console.log($scope.backgroundImageFlag);
 		};
 
 		//TODO should this be a toggle function?
@@ -117,5 +125,74 @@ angular.module('boilerplateApp')
 		$scope.imageHeight = 100 / $rootScope.imageData.length + '%';
 
 
-		window.imageData = $rootScope.imageData;
+
+
+
+	var selected = null, // Object of the element to be moved
+	  x_pos = 0,
+	  y_pos = 0, // Stores x & y coordinates of the mouse pointer
+	  x_elem = 0,
+	  y_elem = 0; // Stores top, left values (edge) of the element
+
+	// Will be called when user starts dragging an element
+	function _drag_init(elem) {
+	  // Store the object of the element which needs to be moved
+	  selected = elem;
+
+	  x_elem = x_pos - selected.offsetLeft;
+	  y_elem = y_pos - selected.offsetTop;
+	}
+	$scope.downInit = function(el, index){
+		$rootScope.imageData.forEach(function(datum){
+			datum.currentlyMoving = false;
+		});
+		$rootScope.imageData[index].currentlyMoving = true;
+    _drag_init(el.target);
+    return false;
+	};
+
+	// Will be called when user dragging an element
+	$scope._move_elem = function(e) {
+	  x_pos = document.all ? window.event.clientX : e.pageX;
+	  y_pos = document.all ? window.event.clientY : e.pageY;
+
+	  if (selected !== null) {
+	    selected.style.left = (x_pos - x_elem) + 'px';
+	    selected.style.top = (y_pos - y_elem) + 'px';
+	    //document.getElementById("code-block-pos").innerHTML = "<code>top: " + (y_pos - y_elem) + "px;<br> left: " + (x_pos - x_elem) + "px;</code>";
+	  }
+	}
+
+	// Destroy the object when we are done
+	$scope._destroy = function() {
+		//set final position properties to $rootScope.imageData
+		var currentlyMoving = $rootScope.imageData.filter(function(datum){
+			return datum.currentlyMoving === true;
+		})[0];
+		currentlyMoving.top = selected.style.top;
+		currentlyMoving.left = selected.style.left;
+
+		console.log(currentlyMoving);
+		//console.log(selected.style.left, selected.style.top)
+	  selected = null;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	});
