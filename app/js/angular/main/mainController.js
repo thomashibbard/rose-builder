@@ -27,13 +27,11 @@ angular.module('boilerplateApp')
 		$scope.resizeContainerAfterXHR = function(){
 			var pathsToResize = ['/placeImages', '/imageData'];
 			if (pathsToResize.indexOf($location.path()) > -1){
-				console.log('yup');
 			    var $container = jQuery('.container')
 			    	, $main = jQuery('#main')
 			    	, containerHeight = parseInt($container.css('height'), 10)
 			    	, mainHeight = parseInt($main.css('height'), 10)
 			    $container.css('height', containerHeight + 350 + 'px');
-			    console.log($container.css('height'));
 			}
 			jQuery('body, html, .container').scrollTop(-100);
 		};
