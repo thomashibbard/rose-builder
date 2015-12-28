@@ -1,12 +1,42 @@
-<div>
+<div class="place-image-container">
 	<div class="row">
-		<div class="four columns">
-			<span class="u-full-width">
-				<label>
-					Drag and Resize Rectangle to position of {{$root.imageData[$scope.imageID]}}
-				</label>
-			</span>
+		<div class="four columns u-full-width">
+			<label>
+					Click a filename, drag, and resize.
+					<button type="button" class="u-full-width thin-button" ng-click="toggleBackgroundImage()">
+						Toggle image/placeholder
+					</button>
+					<button type="button" class="u-full-width thin-button" ng-click="">
+						Toggle border
+					</button>					
+					<hr class="thin-divider" />
+			</label>
+			<div class="place-image-palette">
+				<button class="u-full-width thin-button"
+								ng-repeat="image in $root.imageData" 
+					   ng-click="showPlaceholder($index)">
+					   <!--ng-style="{height: imageHeight}"-->
+					<span>
+					{{image.fileName}}
+					</span>
+				</button>
+			</div>
 		</div>
+		<div class="two columns">&nbsp;</div>
+		<div class="six columns place-image-canvas-container">
+			<div ng-repeat="image in $root.imageData" 
+					 ng-show="image.placeholderShown"
+					 ng-class="{'hide-bg-image': backgroundImageFlag}"
+					 ng-style="{width: image.width, height: image.height}"					 
+					 class="place-image-placeholder"
+					 style="background-image: url(./images/{{image.fileName}})">
+				<div class="filename-container">
+					 {{image.fileName}}
+				</div>
+			</div>
+			<img class="place-image-canvas" src="uploadedImages/evergreen.png" />
+		
+		</div>
+	</div>
 <!-- 	<img src="{{$root.staticImagePath}}" /> -->
-<img src="uploadedImages/evergreen.png" />
 </div>

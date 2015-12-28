@@ -1,6 +1,7 @@
 angular.module('boilerplateApp', ['ngRoute', 'ngAnimate', 'ngFileUpload'])
 
 	.config(function($routeProvider, $locationProvider) {
+
 		$routeProvider
 		// select directory of images
 		.when('/', {
@@ -36,4 +37,6 @@ angular.module('boilerplateApp', ['ngRoute', 'ngAnimate', 'ngFileUpload'])
 			controller: 'fileRenameCtrl'
 		})*/
 		// $locationProvider.html5Mode(true);
+
+
 	});

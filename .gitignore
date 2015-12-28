@@ -24,5 +24,3 @@ uploadedStaticImages
 .sass-cache
 .sass-cache/*
 
-
-*/**/*.scss

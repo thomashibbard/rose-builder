@@ -7,6 +7,11 @@ html, body, .container {
   height: 100%;
 }
 
+hr.thin-divider {
+  margin-top: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
 .container {
   width: 85%;
   margin: 0 auto;
@@ -15,7 +20,6 @@ html, body, .container {
   color: #555;
   padding: 8px 50px;
   margin-top: 0;
-  overflow: hidden;
 }
 .container .navbar-spacer {
   width: 100%;
@@ -96,6 +100,40 @@ html, body, .container {
   background-color: rgba(58, 156, 26, 0.52);
   padding: 5px 5px 3px 6px;
 }
+.container .place-image-container .place-image-canvas-container {
+  position: relative;
+}
+.container .place-image-container .place-image-canvas {
+  border: 1px solid #d5d5d5;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.container .place-image-container .place-image-placeholder {
+  opacity: 0.9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+.container .place-image-container .place-image-placeholder .filename-container {
+  background-color: white;
+  opacity: 0.8;
+  font-size: 8px;
+  text-align: center;
+  color: red;
+  width: 100%;
+  border-style: solid;
+  border-width: 1px 0;
+  border-color: rgba(255, 0, 0, 0.48);
+}
+.container .place-image-container .hide-bg-image {
+  background-image: unset !important;
+  background-color: #333333 !important;
+}
+.container .place-image-container .place-image-palette {
+  height: 500px;
+}
 
 .spa-anchor {
   color: unset;
@@ -110,9 +148,10 @@ html, body, .container {
   text-decoration: unset;
 }
 
-@media only screen and (max-device-width: 1000px) {
-  .image-option-text {
-    font-size: 8px !important;
+@media (max-width: 1000px) {
+  .image-option-text,
+  .add-all-image {
+    font-size: 8px;
     margin-left: -7px;
   }
 }

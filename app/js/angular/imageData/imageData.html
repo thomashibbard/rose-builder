@@ -8,15 +8,19 @@
       </span>
     </div>
     <div class="four columns">
-      <button class="u-full-width add-all-image"
+      <button class="u-full-width add-all-image thin-button"
               ng-click="toggleImageBatchAll()">
-        {{allInBatch ? "Remove All from Batch" : "Add All to Batch"}}
+        <div>
+          {{allInBatch ? "Remove All from Batch" : "Add All to Batch"}}
+        </div>
       </button>
     </div>
     <div class="four columns">
-      <button class="u-full-width add-all-image"
+      <button class="u-full-width add-all-image thin-button"
               ng-click="toggleImageRequiredAll()">
-        {{allRequired ? "Remove All as Required" : "Add All as Required"}}
+        <div>
+          {{allRequired ? "Remove All as Required" : "Add All as Required"}}
+        </div>
       </button>
     </div>
   <hr style="border-bottom:1px solid black;" />

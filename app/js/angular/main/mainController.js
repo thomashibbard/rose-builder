@@ -1,5 +1,5 @@
 angular.module('boilerplateApp')
-	.controller('mainCtrl', function($scope, $rootScope, $http, $location){
+	.controller('mainCtrl', function($scope, $rootScope, $http, $location, $routeParams/*, $timeout*/){
 
 		$scope.mainMenu = ['imageLocation', 'imageData'];
 		$scope.activeMenuIndex = 0;
@@ -7,32 +7,30 @@ angular.module('boilerplateApp')
 			$scope.activeMenuIndex++;
 		};
 		$scope.srcDir = '/Users/thibbard/Documents/repos/projects/rose-builder/images';
-/*		$scope.getIt = function(){
-			console.log('hello', $scope.srcDir);
-			$http.get('http://localhost:8888/GetImageData/' + encodeURIComponent($scope.srcDir))
-			.then(function(response){
-				console.log('got data', response);
-			}, function(response){
-				console.log('error getting data!', response);
-			})
-		};*/
-		
-		//go back to entry-level route if user has no imageData loaded
-/*		if(!$rootScope.imageData){
-			$location.path( '/' );
-		}*/
-
-
-
-
 
 		$rootScope.helpers = {};
 		$rootScope.helpers.resetHeight = function(){
-/*			var containerHeight = parseInt(jQuery(".container").css("height"), 10);
-			var rows = jQuery(".image-data-row");
-			var newHeight = containerHeight + parseInt(rows.eq(0).css("height"), 10) * rows.size() + 50;
-			jQuery(".container").css("height", newHeight)
-			console.log('resized')*/
-		};
+
+		}
+
+    $scope.$on(
+      "$locationChangeSuccess",
+      function handleLocationChangeEvent( event ) {
+      	resizeContainerAfterXHR();
+      }
+    );		
 
 	});
+
+	//incredibly hacky function to resize .container after AJAX
+	//i can't find any better way to do this honestly: .container
+	//would always end up shorter than the content it contained.
+	//at least i was able to do it without the $timeout thank god.
+	function resizeContainerAfterXHR(){
+    var $container = jQuery('.container')
+    	, $main = jQuery('#main')
+    	, containerHeight = parseInt($container.css('height'), 10)
+    	, mainHeight = parseInt($main.css('height'), 10)
+    $container.css('height', containerHeight + mainHeight + 150);
+    console.log($container.css('height'));
+	}
