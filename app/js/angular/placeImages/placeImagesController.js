@@ -193,7 +193,6 @@ angular.module('boilerplateApp')
 	$scope.getImageSize = function(currentlyMoving, target){
 		currentlyMoving.alteredWidth = target.style.width;
 		currentlyMoving.alteredHeight = target.style.height;
-		console.log(currentlyMoving);
 	};
 
 	$scope.placeholderMouseup = function(e){

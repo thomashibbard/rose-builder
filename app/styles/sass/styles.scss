@@ -139,7 +139,7 @@ hr.thin-divider{
       top: 0;
       left: 0;
 
-      -webkit-filter: saturate(10);
+      -webkit-filter: sepia(30%) saturate(10);
     }
     .place-image-placeholder{
       opacity: 0.9;
@@ -204,7 +204,6 @@ hr.thin-divider{
 
 
   @media (max-width: $break-med) {
-    .image-option-text,
     .add-all-image{
       font-size: $small-font; 
       margin-left: -7px;

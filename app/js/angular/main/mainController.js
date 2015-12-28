@@ -16,21 +16,27 @@ angular.module('boilerplateApp')
     $scope.$on(
       "$locationChangeSuccess",
       function handleLocationChangeEvent( event ) {
-      	resizeContainerAfterXHR();
+      	$scope.resizeContainerAfterXHR();
       }
-    );		
+    );	
+
+		//incredibly hacky function to resize .container after AJAX
+		//i can't find any better way to do this honestly: .container
+		//would always end up shorter than the content it contained.
+		//at least i was able to do it without the $timeout thank god.
+		$scope.resizeContainerAfterXHR = function(){
+			var pathsToResize = ['/placeImages', '/imageData'];
+			if (pathsToResize.indexOf($location.path()) > -1){
+				console.log('yup');
+			    var $container = jQuery('.container')
+			    	, $main = jQuery('#main')
+			    	, containerHeight = parseInt($container.css('height'), 10)
+			    	, mainHeight = parseInt($main.css('height'), 10)
+			    $container.css('height', containerHeight + 150 + 'px');
+			    console.log($container.css('height'));
+			}
+			jQuery('body, html, .container').scrollTop(-100);
+		};
 
 	});
 
-	//incredibly hacky function to resize .container after AJAX
-	//i can't find any better way to do this honestly: .container
-	//would always end up shorter than the content it contained.
-	//at least i was able to do it without the $timeout thank god.
-	function resizeContainerAfterXHR(){
-    var $container = jQuery('.container')
-    	, $main = jQuery('#main')
-    	, containerHeight = parseInt($container.css('height'), 10)
-    	, mainHeight = parseInt($main.css('height'), 10)
-    $container.css('height', containerHeight + mainHeight + 150);
-    console.log($container.css('height'));
-	}

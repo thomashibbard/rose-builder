@@ -57,18 +57,9 @@ angular.module('boilerplateApp')
 		};
 		$scope.fileRename = function(){
 			$location.path( '/fileRename' );			
-		}
-		$scope.generateRosetta = function(){
-			console.log('generating rosetta')
-			//build rosetta object from $rootScope.imageData
-			$http.post('http://localhost:8888/generateRosetta/', {
-				imageData: $rootScope.imageData
-			})
-			.then(function(response){
-				console.log('rosetta obj', response.data);
-			}, function(response){
-				console.log('error generating rosetta', response);
-			});
+		};
+		$scope.uploadAlignToImage = function(){
+			$location.path( '/upload' );
 		};
 
 	});
