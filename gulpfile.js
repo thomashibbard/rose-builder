@@ -82,16 +82,9 @@
 	        .pipe(gulp.dest('./app/styles/css/'));
 	});
 
-
-
 	gulp.task('watch-sass', function () {
 	    gulp.watch('./app/styles/sass/*.scss', ['sass']);
 	});
-
-
-
-
-
 
 
 	gulp.task('start-server', false, function(callback){
@@ -124,7 +117,9 @@
 
 
 
-
+	function js(shouldMinify){
+		
+	}
 
 
 

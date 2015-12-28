@@ -8,7 +8,7 @@ angular.module('boilerplateApp')
 		    "top": 0,
 		    "left": 0,
 		    "type": "jpg",
-		    "fileName": "bottle.jpg",
+		    "fileName": "bottle.png",
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
