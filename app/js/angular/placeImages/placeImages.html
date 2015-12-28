@@ -1,4 +1,4 @@
-<div class="place-image-container" ng-mouseup="_destroy()">
+<div class="place-image-container" ng-mouseup="placeholderMouseup($event)">
 	<div class="row">
 		<div class="four columns u-full-width">
 			<label>
@@ -6,15 +6,22 @@
 					<button type="button" class="u-full-width thin-button" ng-click="toggleBackgroundImage()">
 						Toggle image/placeholder
 					</button>
-					<button type="button" class="u-full-width thin-button" ng-click="">
+					<button type="button" class="u-full-width thin-button" ng-click="togglePlaceholderBorder()">
 						Toggle border
+					</button>
+					<button type="button" class="u-full-width thin-button" ng-click="toggleFileName()">
+						Toggle filename
 					</button>					
+					<button type="button" class="u-full-width thin-button" ng-click="toggleSaturation()">
+						Saturate background
+					</button>
 					<hr class="thin-divider" />
 			</label>
 			<div class="place-image-palette">
 				<button class="u-full-width thin-button"
-								ng-repeat="image in $root.imageData" 
-					   ng-click="showPlaceholder($index)">
+								ng-repeat="image in $root.imageData"
+								ng-class="{'active-image-button': image.placeholderShown}"
+					      ng-click="showPlaceholder($index)">
 					   <!--ng-style="{height: imageHeight}"-->
 					<span>
 					{{image.fileName}}
@@ -26,19 +33,31 @@
 		<div class="six columns place-image-canvas-container">
 			<div ng-repeat="image in $root.imageData" 
 					 ng-show="image.placeholderShown"
-					 ng-class="{'hide-bg-image': backgroundImageFlag}"
+					 ng-class="{'hide-bg-image': backgroundImageFlag, 'hide-placeholder-border': placeholderBorderFlag}"
 					 ng-style="{width: image.width, height: image.height}"
 					 ng-mousedown="downInit($event, $index)"
 					 ng-mousemove="_move_elem($event)"		 
 					 class="place-image-placeholder"
 					 style="background-image: url(./images/{{image.fileName}})">
-				<div class="filename-container">
+				<div class="filename-container"
+						 ng-show="showFileNameFlag">
 					 {{image.fileName}}
 				</div>
 			</div>
-			<img class="place-image-canvas" src="uploadedImages/evergreen.png" />
+			<img class="place-image-canvas" 
+			 		 src="uploadedImages/evergreen.png" 
+			 		 ng-class="{'hide-saturation': hideSaturationFlag}" />
 		
 		</div>
+	</div>
+	<div class="row">
+		<div class="four columns">&nbsp;</div>
+		<div class="four columns">
+			<button class="u-full-width">
+				Download Rosetta Object
+			</button>
+		</div>
+		<div class="four columns">&nbsp;</div>		
 	</div>
 <!-- 	<img src="{{$root.staticImagePath}}" /> -->
 </div>

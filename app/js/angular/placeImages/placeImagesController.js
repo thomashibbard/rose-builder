@@ -10,7 +10,8 @@ angular.module('boilerplateApp')
 		    "inBatch": false,
 		    "isRequired": false,
 		    "useImage": true,
-				"placeholderShown": true
+				"placeholderShown": true,
+				"currentlyMoving": true
 		  },
 		  {
 		    "width": 107,
@@ -123,12 +124,24 @@ angular.module('boilerplateApp')
 			$rootScope.imageData[index].placeholderShown = !$rootScope.imageData[index].placeholderShown;
 		};
 		$scope.imageHeight = 100 / $rootScope.imageData.length + '%';
+		
+		$scope.placeholderBorderFlag = true;
+		$scope.togglePlaceholderBorder = function(){
+			console.log($scope.placeholderBorderFlag)
+			$scope.placeholderBorderFlag = !$scope.placeholderBorderFlag;
+		};
+		$scope.showFileNameFlag = true;
+		$scope.toggleFileName = function(){
+			$scope.showFileNameFlag = !$scope.showFileNameFlag;
+		};
+		$scope.hideSaturationFlag = true;
+		$scope.toggleSaturation = function(){
+			console.log($scope.hideSaturationFlag)
+			$scope.hideSaturationFlag = !$scope.hideSaturationFlag;
+		};
 
 
-
-
-
-	var selected = null, // Object of the element to be moved
+	var selected = null, formerSelected = null// Object of the element to be moved
 	  x_pos = 0,
 	  y_pos = 0, // Stores x & y coordinates of the mouse pointer
 	  x_elem = 0,
@@ -159,23 +172,38 @@ angular.module('boilerplateApp')
 	  if (selected !== null) {
 	    selected.style.left = (x_pos - x_elem) + 'px';
 	    selected.style.top = (y_pos - y_elem) + 'px';
-	    //document.getElementById("code-block-pos").innerHTML = "<code>top: " + (y_pos - y_elem) + "px;<br> left: " + (x_pos - x_elem) + "px;</code>";
 	  }
-	}
+	};
 
 	// Destroy the object when we are done
-	$scope._destroy = function() {
-		//set final position properties to $rootScope.imageData
+	$scope._destroy = function(currentlyMoving) {
+		if (selected) {
+			//set  position properties to $rootScope.imageData
+			//do this on destroy so that _move_elem only sets the one property
+			//as of now, it is not throttled, so it could potentially get too
+			//heavy and laggy if to much is done there
+			currentlyMoving.top = selected.style.top;
+			currentlyMoving.left = selected.style.left;
+			console.log(currentlyMoving);
+			//TODO use this fo
+			formerSelected = selected;
+		  selected = null;
+		}
+	};
+	$scope.getImageSize = function(currentlyMoving, target){
+		currentlyMoving.alteredWidth = target.style.width;
+		currentlyMoving.alteredHeight = target.style.height;
+		console.log(currentlyMoving);
+	};
+
+	$scope.placeholderMouseup = function(e){
 		var currentlyMoving = $rootScope.imageData.filter(function(datum){
 			return datum.currentlyMoving === true;
-		})[0];
-		currentlyMoving.top = selected.style.top;
-		currentlyMoving.left = selected.style.left;
+		})[0];		
 
-		console.log(currentlyMoving);
-		//console.log(selected.style.left, selected.style.top)
-	  selected = null;
-	}
+		$scope.getImageSize(currentlyMoving, e.target);
+		$scope._destroy(currentlyMoving);
+	};
 
 
 

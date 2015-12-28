@@ -100,21 +100,39 @@ hr.thin-divider {
   background-color: rgba(58, 156, 26, 0.52);
   padding: 5px 5px 3px 6px;
 }
+.container .place-image-container {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.container .place-image-container .active-image-button {
+  border: 1px solid red;
+}
 .container .place-image-container .place-image-canvas-container {
   position: relative;
 }
 .container .place-image-container .place-image-canvas {
-  border: 1px solid #d5d5d5;
+  box-shadow: inset 0px 0px 0px 3px gray;
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-filter: saturate(10);
 }
 .container .place-image-container .place-image-placeholder {
   opacity: 0.9;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
+  background-size: 100%;
   z-index: 10000;
+  cursor: move;
+  background-repeat: no-repeat;
+  position: absolute;
+  opacity: 0.6;
+  resize: both;
+  overflow: auto;
+  -webkit-box-shadow: inset 0px 0px 0px 1px red;
+  -moz-box-shadow: inset 0px 0px 0px 1px red;
+  box-shadow: inset 0px 0px 0px 1px red;
 }
 .container .place-image-container .place-image-placeholder .filename-container {
   background-color: white;
@@ -127,9 +145,17 @@ hr.thin-divider {
   border-width: 1px 0;
   border-color: rgba(255, 0, 0, 0.48);
 }
+.container .place-image-container .hide-placeholder-border {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
 .container .place-image-container .hide-bg-image {
   background-image: unset !important;
   background-color: #333333 !important;
+}
+.container .place-image-container .hide-saturation {
+  -webkit-filter: initial;
 }
 .container .place-image-container .place-image-palette {
   height: 500px;
