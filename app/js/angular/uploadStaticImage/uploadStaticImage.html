@@ -1,18 +1,30 @@
-<div>
-  <h4>Upload on file select</h4>
-  <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
-          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" name="staticUpload">
-      Select File</button>
-  <br><br>
-  File:
-  <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+<div class="row">
+  <div class="four columns">
+      <label>Upload align-to image</label>
+  </div>
+  <div class="eight columns">
+    <button type="file" class="u-full-width" ngf-select="uploadFiles($file, $invalidFiles)"
+            accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" name="staticUpload">
+        Select File</button>
+  </div>
+  <div class="eight columns">
+    &nbsp;
+  </div>
+</div>
+<!-- <hr class="thin-divider"> -->
+<div class="row">
+  <div class="twelve columns">
+    File:
+    <div style="font:smaller">
+      {{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
       <span class="progress" ng-show="f.progress >= 0">
           <div style="width:{{f.progress}}%"  
                ng-bind="f.progress + '%'"></div>
       </span>
-  </div>     
-  {{errorMsg}}
- </div>
+    </div>     
+      {{errorMsg}}
+  </div>
+</div>
 
  <style>
 .thumb {

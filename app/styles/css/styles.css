@@ -12,6 +12,10 @@ hr.thin-divider {
   margin-bottom: 1.2rem;
 }
 
+h6 {
+  margin-bottom: 0.3rem;
+}
+
 .container {
   width: 85%;
   margin: 0 auto;

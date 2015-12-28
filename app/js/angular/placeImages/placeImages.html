@@ -1,23 +1,26 @@
-<div class="place-image-container" ng-mouseup="placeholderMouseup($event)">
+<div class="place-image-container" ng-mouseup="placeholderMouseup($event)" ng-keydown="$event.which === 13 && nudgeImage($event)">
 	<div class="row">
 		<div class="four columns u-full-width">
 			<label>
-					Click a filename, drag, and resize.
-					<button type="button" class="u-full-width thin-button" ng-click="toggleBackgroundImage()">
-						Toggle image/placeholder
-					</button>
-					<button type="button" class="u-full-width thin-button" ng-click="togglePlaceholderBorder()">
-						Toggle border
-					</button>
-					<button type="button" class="u-full-width thin-button" ng-click="toggleFileName()">
-						Toggle filename
-					</button>					
-					<button type="button" class="u-full-width thin-button" ng-click="toggleSaturation()">
-						Saturate background
-					</button>
-					<hr class="thin-divider" />
+				Click a filename, drag, and resize.
+				<hr class="thin-divider">
+				<h6>Placement Option</h6>				
+				<button type="button" class="u-full-width thin-button" ng-click="toggleBackgroundImage()">
+					Toggle image/placeholder
+				</button>
+				<button type="button" class="u-full-width thin-button" ng-click="togglePlaceholderBorder()">
+					Toggle border
+				</button>
+				<button type="button" class="u-full-width thin-button" ng-click="toggleFileName()">
+					Toggle filename
+				</button>					
+				<button type="button" class="u-full-width thin-button" ng-click="toggleSaturation()">
+					Saturate background
+				</button>
+				<hr class="thin-divider" />
 			</label>
 			<div class="place-image-palette">
+				<h6>Images to Place</h6>
 				<button class="u-full-width thin-button"
 								ng-repeat="image in $root.imageData"
 								ng-class="{'active-image-button': image.placeholderShown}"
@@ -34,11 +37,11 @@
 			<div ng-repeat="image in $root.imageData" 
 					 ng-show="image.placeholderShown"
 					 ng-class="{'hide-bg-image': backgroundImageFlag, 'hide-placeholder-border': placeholderBorderFlag}"
-					 ng-style="{width: image.width, height: image.height}"
+					 ng-style="{width: image.width, height: image.height, top: image.top, left: image.left}"
 					 ng-mousedown="downInit($event, $index)"
 					 ng-mousemove="_move_elem($event)"		 
 					 class="place-image-placeholder"
-					 style="background-image: url(./images/{{image.fileName}})">
+					 style="background-image: url(./images/{{image.fileName}});">
 				<div class="filename-container"
 						 ng-show="showFileNameFlag">
 					 {{image.fileName}}
@@ -47,7 +50,6 @@
 			<img class="place-image-canvas" 
 			 		 src="uploadedImages/evergreen.png" 
 			 		 ng-class="{'hide-saturation': hideSaturationFlag}" />
-		
 		</div>
 	</div>
 	<div class="row">
