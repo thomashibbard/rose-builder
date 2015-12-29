@@ -1,8 +1,6 @@
 angular.module('boilerplateApp')
 	.controller('imageDataCtrl', function($scope, $rootScope, $http, $location, GetImageData){
 
-		$scope.message = 'image data message';
-
 		$scope.toggleUseImage = function(index){
 			$rootScope.imageData[index].useImage = !$rootScope.imageData[index].useImage;
 		};
@@ -48,9 +46,6 @@ angular.module('boilerplateApp')
 				$scope.allRequired = true;
 			}
 		};
-
-
-
 
 		$scope.goToImageLocation = function(){
 			$location.path( '/' );

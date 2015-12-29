@@ -3,7 +3,7 @@
     <div class="four columns">
       <span  class="u-full-width">
         <label>
-          Location to scan for images: {{message}}
+          Location to scan for images:
         </label>
       </span>
     </div>
@@ -12,13 +12,18 @@
     </div>
   </div>
   <div class="row">
+    <div class="four columns">&nbsp;
+    </div>
     <div class="four columns">
+      <select class="u-full-width"
+              ng-model="sizes.selectedSize"
+              ng-options="size.display for size in sizes.sizesArr track by size.id"
+              ng-change="updateRootSelectedSize()">
+      </select>
+      </select>
     </div>
-    <div class="six columns">
-       <button class="" ng-click="getImageData()">Scan Dir for Images</button>
-    </div>
-    <div class="two columns">
-    {{message}}
+    <div class="four columns">
+       <button class="u-full-width" ng-click="getImageData()">Scan Dir</button>    
     </div>    
   </div>
 </div>

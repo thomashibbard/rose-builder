@@ -33,9 +33,9 @@ async.waterfall([
 					console.log('sizeOf error', err);
 				}else{
 					imageDatum.fileName = file;
-					imageDatum.inBatch = false;
-					imageDatum.isRequired = false;
-					imageDatum.useImage = true;
+					imageDatum.inBatch = false; 	//TODO move to angular controller
+					imageDatum.isRequired = false; 	//TODO move to angular controller
+					imageDatum.useImage = true; 	//TODO move to angular controller
 					imageData.push(imageDatum);
 					cb();
 				}

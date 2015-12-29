@@ -17,15 +17,17 @@
 				<button type="button" class="u-full-width thin-button" ng-click="toggleSaturation()">
 					Saturate background
 				</button>
+<!-- 				<button type="button" class="u-full-width thin-button" ng-click="toggleAlignToImage()">
+					Toggle Align-to image
+				</button> -->
 				<hr class="thin-divider" />
 			</label>
 			<div class="place-image-palette">
 				<h6>Images to Place</h6>
 				<button class="u-full-width thin-button"
-						ng-repeat="image in $root.imageData"
-						ng-class="{'active-image-button': image.placeholderShown}"
-					    ng-click="placeImageSelectFileName($index)">
-					   <!--ng-style="{height: imageHeight}"-->
+								ng-repeat="image in $root.imageData"
+								ng-class="{'active-image-button': image.placeholderShown}"
+					    	ng-click="placeImageSelectFileName($index)">
 					<span>
 					{{image.fileName}}
 					</span>
@@ -47,20 +49,24 @@
 					 {{image.fileName}}
 				</div>
 			</div>
-			<img class="place-image-canvas" 
-			 		 src="uploadedImages/evergreen.png" 
+			<label>Align-to image {{alignToImageFlag ? On : Off}}</label>
+			<img class="place-image-canvas"
+			 		 src="{{$root.staticImagePath}}"
 			 		 ng-class="{'hide-saturation': hideSaturationFlag}" />
+		
 		</div>
 	</div>
 	<div class="row">
 		<div class="four columns">&nbsp;</div>
 		<div class="four columns">
-			<button class="u-full-width">
+			<button class="u-full-width"
+					ng-click="saveCurrentAndProceed()">
 				Build Another Size
 			</button>
 		</div>
 		<div class="four columns">
-			<button class="u-full-width">
+			<button class="u-full-width"
+					ng-click="$root.downloadRosetta()">
 				Download Rosetta Object
 			</button>			
 		</div>		

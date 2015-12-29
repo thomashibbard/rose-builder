@@ -1,7 +1,7 @@
 angular.module('boilerplateApp')
 	.controller('placeImagesCtrl', function($scope, $rootScope, $http, $location, $document){
 
-		$rootScope.imageData = [
+/*		$rootScope.imageData = [
 		  {
 		    "height": 308,
 		    "width": 78,
@@ -132,7 +132,19 @@ angular.module('boilerplateApp')
 				"placeholderShown": false,
 				"currentlyMoving": false
 		  }
-		];
+		];*/
+
+		$rootScope.imageData.forEach(function(datum, index){
+		  if (index === 0){
+		   datum.placeholderShown = true;
+		   datum.currentlyMoving = true;
+		  }else{
+		   datum.placeholderShown = false;
+		   datum.currentlyMoving = false;
+		  }
+		});
+		console.log('new', $rootScope.imageData);
+
 		$scope.backgroundImageFlag = true;
 		$scope.toggleBackgroundImage = function(){
 			$scope.backgroundImageFlag = !$scope.backgroundImageFlag;
@@ -157,24 +169,25 @@ angular.module('boilerplateApp')
 		$scope.toggleSaturation = function(){
 			$scope.hideSaturationFlag = !$scope.hideSaturationFlag;
 		};
-	$scope.placeImageSelectFileName = function(index){
-		$scope.showPlaceholder(index);
-		$scope.setCurrentlyMoving(index);
-	}
-	$scope.getCurrentlyMoving = function(){
-		return $rootScope.imageData.filter(function(datum){
-				return datum.currentlyMoving === true;
-		})[0];		
-	};
-	$scope.setCurrentlyMoving = function(index){
-		$rootScope.imageData.forEach(function(datum){
-			datum.currentlyMoving = false;
-		});
-		$rootScope.imageData[index].currentlyMoving = true;
-	};
-	$scope.getCurrentlyMovingIndex = function(){
-		return _.findIndex($rootScope.imageData, function(datum){
-			return datum.currentlyMoving == true;
+
+		$scope.placeImageSelectFileName = function(index){
+			$scope.showPlaceholder(index);
+			$scope.setCurrentlyMoving(index);
+		}
+		$scope.getCurrentlyMoving = function(){
+			return $rootScope.imageData.filter(function(datum){
+					return datum.currentlyMoving === true;
+			})[0];		
+		};
+		$scope.setCurrentlyMoving = function(index){
+			$rootScope.imageData.forEach(function(datum){
+				datum.currentlyMoving = false;
+			});
+			$rootScope.imageData[index].currentlyMoving = true;
+		};
+		$scope.getCurrentlyMovingIndex = function(){
+			return _.findIndex($rootScope.imageData, function(datum){
+				return datum.currentlyMoving == true;
 		});
 	};
 
@@ -234,10 +247,6 @@ angular.module('boilerplateApp')
 		var currentlyMoving = $scope.getCurrentlyMoving();
 		$scope.getImageSize(currentlyMoving, e.target);
 		$scope._destroy(currentlyMoving);
-	};
-
-	$scope.nudgeImage = function(e){
-		console.log(e);
 	};
 
   $document.bind("keydown", function(event) {
