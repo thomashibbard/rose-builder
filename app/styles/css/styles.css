@@ -48,9 +48,10 @@ h6 {
   border-bottom: 1px solid #B53F14;
 }
 .container .header .rose-icon {
-  width: 32px;
+  width: 64px;
   position: relative;
-  top: 2px;
+  top: 17px;
+  right: 9px;
 }
 .container .header h2, .container .header img {
   display: inline-block;

@@ -1,7 +1,6 @@
 	var gulp = require('gulp')
 		, plugins = require('gulp-load-plugins')
 		, fs = require('fs-extra')
-		, colors = require('colors')
 		, inject = require('gulp-inject')
 		, sass = require('gulp-ruby-sass')
 		, cssmin = require('gulp-minify-css')
