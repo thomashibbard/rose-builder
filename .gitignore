@@ -1,22 +1,23 @@
 #deps
-node_modules
-bower_components
+/node_modules
+/bower_components
 
 
 #other
 http
-images
-images/*
-imagesArchive/*
-uploadedStaticImages/*
-exportedRosetta/*.js
-tests
+http:
+/images
+/images/*
+/imagesArchive/*
+/uploadedStaticImages/*
+/exportedRosetta/*.js
+/tests
 <<<<<<< HEAD
 
 #images
-uploadedImages
-uploadStaticImage
-uploadedStaticImages
+/uploadedImages
+/uploadStaticImage
+/uploadedStaticImages
 
 .sass-cache
 .sass-cache/*
