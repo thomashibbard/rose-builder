@@ -1,29 +1,32 @@
 var express = require('express')
+  , serveindex = require('serve-index')
+  , servestatic = require('serve-static')
+  , bodyParser = require('body-parser')
   , cors = require('cors')
   , app = express()
   , q = require('q')
   , fs = require('fs-extra')
-  , multer = require('multer');
-var bodyParser = require('body-parser')
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-}));
-//app.set('view engine', 'jade');
+  , multer = require('multer')
+  , path = require('path');
 
 //custom modules
 var components = require('./app/js/nodeComponents/');
 
 var PORT = process.env.PORT || 8888;
+__dirname = process.env.PWD || __dirname;
+
+
 app.use(cors());
 
-var whitelist = ['http://localhost:8888/'];
+var whitelist = ['https://localhost:8888/'];
 var corsOptions = {
   origin: function(origin, callback){
     var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
     callback(null, originIsWhitelisted);
   }
 };
+
+
 
 
 app.use(express.static(__dirname));
@@ -57,7 +60,15 @@ app.post('/generateRosetta/', cors(corsOptions), function(req, res, next){
 	//res.json({data: res});
 });
 
-var upload = multer({ dest: 'http://localhost:8888/uploadStaticImage/'});
+
+var userUploadedImages = __dirname + '/userUploadedImages';
+console.log(userUploadedImages)
+app.use(userUploadedImages, servestatic('/userUploadedImages'));
+//app.use(servestatic(userUploadedImages));
+
+
+
+var upload = multer({ dest: '/uploadStaticImage/'});
 var type = upload.any();
 
 app.post('/uploadStaticImage', type, function(req, res){

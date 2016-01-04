@@ -9,10 +9,9 @@ http:
 /images
 /images/*
 /imagesArchive/*
-/uploadedStaticImages/*
+/uploadedStaticImages
 /exportedRosetta/*.js
 /tests
-<<<<<<< HEAD
 
 #images
 /uploadedImages
@@ -21,7 +20,3 @@ http:
 
 .sass-cache
 .sass-cache/*
-
-.sass-cache
-.sass-cache/*
-
