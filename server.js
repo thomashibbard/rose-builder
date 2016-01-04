@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 //custom modules
 var components = require('./app/js/nodeComponents/');
 
-const PORT = 8888;
+var PORT = process.env.PORT || 8888;
 app.use(cors());
 
 var whitelist = ['http://localhost:8888/'];
