@@ -10,10 +10,6 @@
   "scripts": {
     "start": "node server.js",
     "postinstall": "bower install"
-  },  
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ws"
   },
   "author": "thomas",
   "license": "ISC",
