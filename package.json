@@ -1,6 +1,6 @@
 {
   "name": "rose-builder",
-   "engines": {
+  "engines": {
     "node": "4.2.2"
   },
   "version": "0.0.1",
@@ -16,6 +16,7 @@
   "dependencies": {
     "async": "^1.5.0",
     "body-parser": "^1.14.1",
+    "bower": "^1.7.2",
     "chalk": "^1.1.1",
     "cors": "^2.7.1",
     "express": "^4.13.3",
@@ -31,7 +32,6 @@
     "util": "^0.10.3"
   },
   "devDependencies": {
-    "bower": "1.5.2",
     "chai": "^3.4.1",
     "chalk": "^1.1.1",
     "gulp": "^3.9.0",
