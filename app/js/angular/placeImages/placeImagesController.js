@@ -1,7 +1,7 @@
 angular.module('boilerplateApp')
-	.controller('placeImagesCtrl', function($scope, $rootScope, $http, $location, $document){
+	.controller('placeImagesCtrl', function($scope, $rootScope, $http, $location, $document, ImageDataFactory){
 
-/*		$rootScope.imageData = [
+/*		$scope.imageData.dataBySize = [
 		  {
 		    "height": 308,
 		    "width": 78,
@@ -133,8 +133,10 @@ angular.module('boilerplateApp')
 				"currentlyMoving": false
 		  }
 		];*/
-
-		$rootScope.imageData.forEach(function(datum, index){
+		//     /Users/thibbard/Documents/repos/projects/rose-builder/images
+		$scope.imageData = ImageDataFactory.imageData;
+		
+		$scope.imageData.dataBySize.forEach(function(datum, index){
 		  if (index === 0){
 		   datum.placeholderShown = true;
 		   datum.currentlyMoving = true;
@@ -143,7 +145,7 @@ angular.module('boilerplateApp')
 		   datum.currentlyMoving = false;
 		  }
 		});
-		console.log('new', $rootScope.imageData);
+		console.log('new', $scope.imageData.dataBySize);
 
 		$scope.backgroundImageFlag = true;
 		$scope.toggleBackgroundImage = function(){
@@ -153,9 +155,9 @@ angular.module('boilerplateApp')
 		//TODO should this be a toggle function?
 		//for now, actually leaving it a toggle function
 		$scope.showPlaceholder = function(index){
-			$rootScope.imageData[index].placeholderShown = !$rootScope.imageData[index].placeholderShown;
+			$scope.imageData.dataBySize[index].placeholderShown = !$scope.imageData.dataBySize[index].placeholderShown;
 		};
-		$scope.imageHeight = 100 / $rootScope.imageData.length + '%';
+		$scope.imageHeight = 100 / $scope.imageData.dataBySize.length + '%';
 		
 		$scope.placeholderBorderFlag = true;
 		$scope.togglePlaceholderBorder = function(){
@@ -175,18 +177,18 @@ angular.module('boilerplateApp')
 			$scope.setCurrentlyMoving(index);
 		}
 		$scope.getCurrentlyMoving = function(){
-			return $rootScope.imageData.filter(function(datum){
+			return $scope.imageData.dataBySize.filter(function(datum){
 					return datum.currentlyMoving === true;
 			})[0];		
 		};
 		$scope.setCurrentlyMoving = function(index){
-			$rootScope.imageData.forEach(function(datum){
+			$scope.imageData.dataBySize.forEach(function(datum){
 				datum.currentlyMoving = false;
 			});
-			$rootScope.imageData[index].currentlyMoving = true;
+			$scope.imageData.dataBySize[index].currentlyMoving = true;
 		};
 		$scope.getCurrentlyMovingIndex = function(){
-			return _.findIndex($rootScope.imageData, function(datum){
+			return _.findIndex($scope.imageData.dataBySize, function(datum){
 				return datum.currentlyMoving == true;
 		});
 	};
@@ -227,7 +229,7 @@ angular.module('boilerplateApp')
 	// Destroy the object when we are done
 	$scope._destroy = function(currentlyMoving) {
 		if (selected) {
-			//set  position properties to $rootScope.imageData
+			//set  position properties to $scope.imageData.dataBySize
 			//do this on destroy so that _move_elem only sets the one property
 			//as of now, it is not throttled, so it could potentially get too
 			//heavy and laggy if to much is done there
@@ -260,25 +262,31 @@ angular.module('boilerplateApp')
   		var increment = event.shiftKey ? 10 : 1;
 			switch (event.which){
 				case 37:
-					$rootScope.imageData[currentlyMovingIndex].left -= increment;
+					$scope.imageData.dataBySize[currentlyMovingIndex].left -= increment;
 					break;
 				case 38:
-					$rootScope.imageData[currentlyMovingIndex].top -= increment;
+					$scope.imageData.dataBySize[currentlyMovingIndex].top -= increment;
 					break;
 				case 39:
-					$rootScope.imageData[currentlyMovingIndex].left += increment;
+					$scope.imageData.dataBySize[currentlyMovingIndex].left += increment;
 					break;
 				case 40:
-					$rootScope.imageData[currentlyMovingIndex].top += increment;
+					$scope.imageData.dataBySize[currentlyMovingIndex].top += increment;
 					break;
 				default:
-					console.log($rootScope.imageData[currentlyMovingIndex]);
+					console.log($scope.imageData.dataBySize[currentlyMovingIndex]);
 					break;
 			}
 			$scope.$apply();
+			console.log($scope.imageData)
 
   	}
   });
+
+
+  $scope.test = function(){
+  	console.log($scope.imageData);
+  };
 
 });
 

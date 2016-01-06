@@ -4,6 +4,7 @@ angular.module('boilerplateApp')
         imageData: {
           config: {
             imageDirectory: '',
+            staticImagePath: '',
             sizes: {
               sizesArr: [{
                 id: 0,
@@ -28,7 +29,6 @@ angular.module('boilerplateApp')
                 plainText: '160x600'
               }
             },
-            imageDirectory: ''  
           },
           dataBySize: [] 
         },

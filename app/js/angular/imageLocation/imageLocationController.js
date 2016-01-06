@@ -13,7 +13,7 @@ angular.module('boilerplateApp')
 		$scope.bgScale = "cover"
 		$scope.directoryType = "size";
 		$scope.urlParams = $scope.bgScale + '/' + $scope.directoryType;
-		$scope.imageLocation = '/Users/thibbard/Documents/repos/projects/rose-builder/images';
+		//$scope.imageLocation = '/Users/thibbard/Documents/repos/projects/rose-builder/images';
 
 		$scope.submitRosetta = function(){
 
@@ -40,7 +40,14 @@ angular.module('boilerplateApp')
 
 		$scope.getImageDataFromDirectory = function(){
 			ImageDataService.GetImageDataFromDirectory($scope.imageData.config.imageDirectory)
-				.then(function(response, err){
+				.then(function(response){
+					var dataBySize = response.data.result;
+					dataBySize.forEach(function(datum){
+						datum.top = null;
+						datum.left = null;
+					});
+
+
 					$scope.imageData.dataBySize = response.data.result;
 					$location.path('/imageData/');
 				}, function(response){
