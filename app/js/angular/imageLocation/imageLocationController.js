@@ -1,16 +1,14 @@
 angular.module('boilerplateApp')
-	.controller('imageLocationCtrl', function($scope, $rootScope, $http, GenerateBoilerplate, $location){
-		$scope.sizes = {
-			sizesArr:[
-				{id: 0, display:'160✕600', code: '160x600'}, {id: 1, display:'300✕600', code: '300x600'}, {id: 2, display:'300✕250', code: '300x250'}, {id: 3, display:'728✕90', code: '728x90'}
-			],
-			selectedSize:{
-				id: 0, display:'160✕600', code: '160x600'
-			}
-		};
-		$scope.updateRootSelectedSize = function(){
-			$rootScope.selectedSize = $scope.sizes.selectedSize;
-			console.log($rootScope.selectedSize);
+	.controller('imageLocationCtrl', function($scope, $rootScope, $http, GenerateBoilerplate, $location, ImageDataFactory, ImageDataService){
+
+		$scope.imageData = ImageDataFactory.imageData;
+
+
+
+		$scope.setSelectedSize = function(){
+			//$rootScope.selectedSize = $scope.sizes.selectedSize;
+			//console.log($rootScope.selectedSize);
+			console.log(ImageDataFactory.imageData.config.sizes.selectedSize);
 		};
 		$scope.bgScale = "cover"
 		$scope.directoryType = "size";
@@ -40,16 +38,14 @@ angular.module('boilerplateApp')
 			$scope.selectedSize = $scope.sizes[index];
 		}
 
-		$scope.getImageData = function() {
-			$http.get('http://localhost:8888/GetImageData/' + encodeURIComponent($scope.imageLocation))
-				.then(function(response) {
-					$rootScope.imageData = response.data.result;
-					//console.log(JSON.stringify($rootScope.imageData, null, '  '))
+		$scope.getImageDataFromDirectory = function(){
+			ImageDataService.GetImageDataFromDirectory($scope.imageData.config.imageDirectory)
+				.then(function(response, err){
+					$scope.imageData.dataBySize = response.data.result;
 					$location.path('/imageData/');
-				}, function(response) {
-					console.log('error getting data!', response);
-				});
+				}, function(response){
+					console.log('error getting image data', response);
+			});
 		};
-
 
 	}); 

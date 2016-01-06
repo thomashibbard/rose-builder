@@ -6,7 +6,7 @@ var sizeOf = require('image-size')
 
 var imageData = {};
 var getImageData = function(srcDir, cb){
-
+console.log('in node', srcDir);
 async.waterfall([
 	function(callback){
 

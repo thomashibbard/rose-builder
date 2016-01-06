@@ -17,6 +17,10 @@ __dirname = process.env.PWD || __dirname;
 
 
 app.use(cors());
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
 var whitelist = ['https://localhost:8888/'];
 var corsOptions = {
@@ -42,14 +46,15 @@ app.get('/process/:bgScale/:dirType/', cors(corsOptions), function(req, res, nex
 	});			
 });
 
-app.get('/getImageData/:srcDir/', cors(corsOptions), function(req, res, next){
-	components.getImageData(req.params.srcDir, function(err, data){
-		if (err){
-			console.log('error with route', err);
-		}else{
-			res.json({result: data});
-		}
-	});
+
+app.post('/getImageData/', cors(corsOptions), function(req, res, next){
+  components.getImageData(req.body.directory, function(err, data){
+    if (err){
+      console.log('error with route', err);
+    }else{
+      res.json({result: data});
+    }
+  });
 });
 
 app.post('/generateRosetta/', cors(corsOptions), function(req, res, next){
@@ -61,10 +66,8 @@ app.post('/generateRosetta/', cors(corsOptions), function(req, res, next){
 });
 
 
-var userUploadedImages = __dirname + '/userUploadedImages';
-console.log(userUploadedImages)
-app.use(userUploadedImages, servestatic('/userUploadedImages'));
-//app.use(servestatic(userUploadedImages));
+app.use('/userUploadedImages', serveindex('userUploadedImages', {'icons': true}));
+app.use('/port', serveindex('userUploadedImages', {'icons': true}));
 
 
 

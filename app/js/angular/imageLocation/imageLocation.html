@@ -8,7 +8,7 @@
       </span>
     </div>
     <div class="eight columns">
-      <input class="u-full-width" type="text" ng-model="imageLocation" value="">
+      <input class="u-full-width" type="text" ng-model="imageData.config.imageDirectory" value="">
     </div>
   </div>
   <div class="row">
@@ -16,14 +16,15 @@
     </div>
     <div class="four columns">
       <select class="u-full-width"
-              ng-model="sizes.selectedSize"
-              ng-options="size.display for size in sizes.sizesArr track by size.id"
-              ng-change="updateRootSelectedSize()">
+              ng-model="imageData.config.sizes.selectedSize"
+              ng-options="size.display for size in imageData.config.sizes.sizesArr track by size.id"
+              ng-change="setSelectedSize()">
       </select>
       </select>
     </div>
     <div class="four columns">
-       <button class="u-full-width" ng-click="getImageData()">Scan Dir</button>    
+       <!-- <button class="u-full-width" ng-click="getImageData()">Scan Dir</button> -->
+       <button class="u-full-width" ng-click="getImageDataFromDirectory()">Scan Dir</button>    
     </div>    
   </div>
 </div>

@@ -1,28 +1,31 @@
 angular.module('boilerplateApp')
-	.controller('imageDataCtrl', function($scope, $rootScope, $http, $location, GetImageData){
+	.controller('imageDataCtrl', function($scope, $rootScope, $http, $location, GetImageData, ImageDataFactory){
+
+		$scope.imageData = ImageDataFactory.imageData;
+		console.log('image data ctrl', $scope.imageData.dataBySize)
 
 		$scope.toggleUseImage = function(index){
-			$rootScope.imageData[index].useImage = !$rootScope.imageData[index].useImage;
+			$scope.imageData.dataBySize[index].useImage = !$scope.imageData.dataBySize[index].useImage;
 		};
 		$scope.toggleImageBatch = function(index){
-			$rootScope.imageData[index].inBatch = !$rootScope.imageData[index].inBatch;
+			$scope.imageData.dataBySize[index].inBatch = !$scope.imageData.dataBySize[index].inBatch;
 		};
 		$scope.toggleImageRequired = function(index){
-			$rootScope.imageData[index].isRequired = !$rootScope.imageData[index].isRequired;
+			$scope.imageData.dataBySize[index].isRequired = !$scope.imageData.dataBySize[index].isRequired;
 		};
 
 		$scope.allInBatch = false;
 		$scope.toggleImageBatchAll = function(){
-			var allBatchOn = $rootScope.imageData.every(function(image){
+			var allBatchOn = $scope.imageData.dataBySize.every(function(image){
 				return image.inBatch;
 			})
 			if (allBatchOn){
-				$rootScope.imageData.forEach(function(image){
+				$scope.imageData.dataBySize.forEach(function(image){
 					image.inBatch = false;
 				});
 				$scope.allInBatch = false;
 			}else{
-				$rootScope.imageData.forEach(function(image){
+				$scope.imageData.dataBySize.forEach(function(image){
 					image.inBatch = true;
 				});
 				$scope.allInBatch = true;				
@@ -31,16 +34,16 @@ angular.module('boilerplateApp')
 
 		$scope.allRequired = false;
 		$scope.toggleImageRequiredAll = function(){
-			var allImageRequired = $rootScope.imageData.every(function(image){
+			var allImageRequired = $scope.imageData.dataBySize.every(function(image){
 				return image.isRequired;
 			});
 			if (allImageRequired){
-				$rootScope.imageData.forEach(function(image){
+				$scope.imageData.dataBySize.forEach(function(image){
 					image.isRequired = false;
 				});
 				$scope.allRequired = false;
 			}else{
-				$rootScope.imageData.forEach(function(image){
+				$scope.imageData.dataBySize.forEach(function(image){
 					image.isRequired = true;
 				});
 				$scope.allRequired = true;

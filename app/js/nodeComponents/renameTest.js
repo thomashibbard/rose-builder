@@ -6,7 +6,7 @@ var suffix = process.argv[3];
 var srcDir = process.argv[4];
 var extRe = /\.\w+$/;
 var visRe = /^\./;
-var imgRe = /png|jpe?g$/;
+var imgRe = /svg|png|jpe?g$/;
 var ext;
 var oldName = '';
 var newName = '';

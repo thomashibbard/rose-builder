@@ -1,5 +1,4 @@
 	var gulp = require('gulp')
-		, plugins = require('gulp-load-plugins')
 		, fs = require('fs-extra')
 		, inject = require('gulp-inject')
 		, sass = require('gulp-ruby-sass')
