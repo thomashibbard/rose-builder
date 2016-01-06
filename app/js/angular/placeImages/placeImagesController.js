@@ -1,139 +1,7 @@
 angular.module('boilerplateApp')
 	.controller('placeImagesCtrl', function($scope, $rootScope, $http, $location, $document, ImageDataFactory){
 
-/*		$scope.imageData.dataBySize = [
-		  {
-		    "height": 308,
-		    "width": 78,
-		    "top": 0,
-		    "left": 0,
-		    "type": "jpg",
-		    "fileName": "bottle.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": true,
-				"currentlyMoving": true
-		  },
-		  {
-		    "width": 107,
-		    "height": 36,
-		    "top": 0,
-		    "left": 0,
-		    "type": "png",
-		    "fileName": "cta.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  },
-		  {
-		    "width": 160,
-		    "height": 600,
-		    "top": 0,
-		    "left": 0,
-		    "type": "png",
-		    "fileName": "evergreen.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  },
-		  {
-		    "width": 160,
-		    "height": 600,
-		    "top": 0,
-		    "left": 0,
-		    "type": "png",
-		    "fileName": "final.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  },
-		  {
-		    "width": 159,
-		    "height": 24,
-		    "top": 0,
-		    "left": 0,
-		    "type": "png",
-		    "fileName": "legal.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  },
-		  {
-		    "height": 600,
-		    "width": 160,
-		    "top": 0,
-		    "left": 0,
-		    "type": "jpg",
-		    "fileName": "pic1.jpg",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  },
-		  {
-		    "width": 200,
-		    "height": 232,
-		    "top": 0,
-		    "left": 0,
-		    "type": "png",
-		    "fileName": "pic2.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  },
-		  {
-		    "width": 160,
-		    "height": 600,
-		    "top": 0,
-		    "left": 0,
-		    "type": "png",
-		    "fileName": "shadow.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  },
-		  {
-		    "width": 104,
-		    "height": 52,
-		    "top": 0,
-		    "left": 0,
-		    "type": "png",
-		    "fileName": "t1.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  },
-		  {
-		    "width": 139,
-		    "height": 43,
-		    "top": 0,
-		    "left": 0,
-		    "type": "png",
-		    "fileName": "t2.png",
-		    "inBatch": false,
-		    "isRequired": false,
-		    "useImage": true,
-				"placeholderShown": false,
-				"currentlyMoving": false
-		  }
-		];*/
-		//     /Users/thibbard/Documents/repos/projects/rose-builder/images
+		//    /Users/thibbard/Documents/repos/projects/rose-builder/images
 		$scope.imageData = ImageDataFactory.imageData;
 		
 		$scope.imageData.dataBySize.forEach(function(datum, index){
@@ -145,7 +13,6 @@ angular.module('boilerplateApp')
 		   datum.currentlyMoving = false;
 		  }
 		});
-		console.log('new', $scope.imageData.dataBySize);
 
 		$scope.backgroundImageFlag = true;
 		$scope.toggleBackgroundImage = function(){
@@ -253,7 +120,6 @@ angular.module('boilerplateApp')
 
   $document.bind("keydown", function(event) {
   	// left: 37, top: 38, right: 39, down: 40
-  	//console.log(event.which);
   	var arrows = [37, 38, 39, 40];
   	if (arrows.indexOf(event.which) > -1){
   		event.preventDefault();
@@ -278,15 +144,16 @@ angular.module('boilerplateApp')
 					break;
 			}
 			$scope.$apply();
-			console.log($scope.imageData)
-
   	}
   });
 
-
-  $scope.test = function(){
+  $scope.downloadRoseString = function(){
   	console.log($scope.imageData);
   };
+
+/*  $scope.test = function(){
+  	console.log($scope.imageData);
+  };*/
 
 });
 

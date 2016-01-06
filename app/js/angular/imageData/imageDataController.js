@@ -2,7 +2,6 @@ angular.module('boilerplateApp')
 	.controller('imageDataCtrl', function($scope, $rootScope, $http, $location, GetImageData, ImageDataFactory){
 
 		$scope.imageData = ImageDataFactory.imageData;
-		console.log('image data ctrl', $scope.imageData.dataBySize)
 
 		$scope.toggleUseImage = function(index){
 			$scope.imageData.dataBySize[index].useImage = !$scope.imageData.dataBySize[index].useImage;
