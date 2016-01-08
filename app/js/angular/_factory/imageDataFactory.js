@@ -33,10 +33,15 @@ angular.module('boilerplateApp')
           dataBySize: [] 
         },
         setImagePosition: function(index, top, left){
+
+          if (top){
+            this.imageData.dataBySize[index].top = top;
+          }
+          if (left){
+            this.imageData.dataBySize[index].left = left;
+          }
           console.log(this.imageData);
-          this.imageData.dataBySize[index].top = top + "px";
-          this.imageData.dataBySize[index].left = left + "px";
-          console.log(this.imageData);
+         // $scope.$apply();
         },
         setCurrentlyMoving: function(index){
           this.imageData.dataBySize.forEach(function(datum){

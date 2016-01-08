@@ -43,7 +43,7 @@
 			     ng-if="image.useImage" 
 					 ng-show="image.placeholderShown"
 					 ng-class="{'hide-bg-image': backgroundImageFlag, 'hide-placeholder-border': placeholderBorderFlag}"
-					 ng-style="{width: image.width, height: image.height, top: image.top, left: image.left}"
+					 ng-style="{width: image.width+'px', height: image.height+'px', top: image.top+'px', left: image.left+'px'}"
 	 
 					 class="place-image-placeholder"
 					 style="background-image: url(./images/{{image.fileName}});">

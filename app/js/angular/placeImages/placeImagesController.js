@@ -128,20 +128,20 @@ angular.module('boilerplateApp')
 		//$scope._destroy(currentlyMoving);
 	};
 
-  $document.bind("keydown", function(event) {
+	$scope.$watch(ImageDataFactory, function(){
+		$scope.imageData = ImageDataFactory.imageData;
+	});
 
-  	// left: 37, top: 38, right: 39, down: 40
+  $document.bind("keydown", function(event) {
   	var arrows = [37, 38, 39, 40];
   	if (arrows.indexOf(event.which) > -1){
   		event.preventDefault();
   		var currentlyMovingIndex = ImageDataFactory.getCurrentlyMovingIndex();
-  		console.log(currentlyMovingIndex);
   		var increment = event.shiftKey ? 10 : 1;
   		var tempCoord; 
 			switch (event.which){
 				case 37: //left
 					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].left, 10);
-					console.log(tempCoord -= increment)
 					$scope.imageData.dataBySize[currentlyMovingIndex].left = tempCoord -= increment;
 					break;
 				case 38: //top
