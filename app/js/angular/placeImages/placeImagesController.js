@@ -2,7 +2,15 @@ angular.module('boilerplateApp')
 	.controller('placeImagesCtrl', function($scope, $rootScope, $http, $location, $document, ImageDataFactory){
 
 		//    /Users/thibbard/Documents/repos/projects/rose-builder/images
-		$scope.imageData = ImageDataFactory.imageData;
+
+		if (ImageDataFactory.imageData.dataBySize.length > 0){
+			$scope.imageData = ImageDataFactory.imageData;
+			localStorage.setItem('imageData', JSON.stringify($scope.imageData));
+		}else{
+			$scope.imageData = ImageDataFactory.imageData = JSON.parse(localStorage.getItem('imageData'));
+		}
+
+		$scope.imageData = JSON.parse(localStorage.getItem('imageData'))
 		
 		$scope.imageData.dataBySize.forEach(function(datum, index){
 		  if (index === 0){
@@ -30,10 +38,12 @@ angular.module('boilerplateApp')
 		$scope.togglePlaceholderBorder = function(){
 			$scope.placeholderBorderFlag = !$scope.placeholderBorderFlag;
 		};
+
 		$scope.showFileNameFlag = true;
 		$scope.toggleFileName = function(){
 			$scope.showFileNameFlag = !$scope.showFileNameFlag;
 		};
+		
 		$scope.hideSaturationFlag = true;
 		$scope.toggleSaturation = function(){
 			$scope.hideSaturationFlag = !$scope.hideSaturationFlag;
@@ -41,7 +51,7 @@ angular.module('boilerplateApp')
 
 		$scope.placeImageSelectFileName = function(index){
 			$scope.showPlaceholder(index);
-			$scope.setCurrentlyMoving(index);
+			ImageDataFactory.setCurrentlyMoving(index);
 		}
 		$scope.getCurrentlyMoving = function(){
 			return $scope.imageData.dataBySize.filter(function(datum){
@@ -60,7 +70,7 @@ angular.module('boilerplateApp')
 		});
 	};
 
-
+/*
 	var selected = null, formerSelected = null// Object of the element to be moved
 	  x_pos = 0,
 	  y_pos = 0, // Stores x & y coordinates of the mouse pointer
@@ -106,7 +116,7 @@ angular.module('boilerplateApp')
 			formerSelected = selected;
 		  selected = null;
 		}
-	};
+	};*/
 	$scope.getImageSize = function(currentlyMoving, target){
 		currentlyMoving.alteredWidth = target.style.width;
 		currentlyMoving.alteredHeight = target.style.height;
@@ -115,29 +125,36 @@ angular.module('boilerplateApp')
 	$scope.placeholderMouseup = function(e){
 		var currentlyMoving = $scope.getCurrentlyMoving();
 		$scope.getImageSize(currentlyMoving, e.target);
-		$scope._destroy(currentlyMoving);
+		//$scope._destroy(currentlyMoving);
 	};
 
   $document.bind("keydown", function(event) {
+
   	// left: 37, top: 38, right: 39, down: 40
   	var arrows = [37, 38, 39, 40];
   	if (arrows.indexOf(event.which) > -1){
   		event.preventDefault();
-  		var currentlyMoving = $scope.getCurrentlyMoving();
-  		var currentlyMovingIndex = $scope.getCurrentlyMovingIndex();
+  		var currentlyMovingIndex = ImageDataFactory.getCurrentlyMovingIndex();
+  		console.log(currentlyMovingIndex);
   		var increment = event.shiftKey ? 10 : 1;
+  		var tempCoord; 
 			switch (event.which){
-				case 37:
-					$scope.imageData.dataBySize[currentlyMovingIndex].left -= increment;
+				case 37: //left
+					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].left, 10);
+					console.log(tempCoord -= increment)
+					$scope.imageData.dataBySize[currentlyMovingIndex].left = tempCoord -= increment;
 					break;
-				case 38:
-					$scope.imageData.dataBySize[currentlyMovingIndex].top -= increment;
+				case 38: //top
+					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].top, 10);
+					$scope.imageData.dataBySize[currentlyMovingIndex].top = tempCoord -= increment;
 					break;
-				case 39:
-					$scope.imageData.dataBySize[currentlyMovingIndex].left += increment;
+				case 39: //right
+					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].left, 10);
+					$scope.imageData.dataBySize[currentlyMovingIndex].left = tempCoord += increment;
 					break;
-				case 40:
-					$scope.imageData.dataBySize[currentlyMovingIndex].top += increment;
+				case 40:  //down
+					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].top, 10);
+					$scope.imageData.dataBySize[currentlyMovingIndex].top = tempCoord += increment;
 					break;
 				default:
 					console.log($scope.imageData.dataBySize[currentlyMovingIndex]);
@@ -147,6 +164,12 @@ angular.module('boilerplateApp')
   	}
   });
 
+  $scope.startAnew = function(){
+  	var c = confirm("Exit page and build new Rose?");
+  	if (c){
+  		$location.path('/');
+  	}
+  };
   $scope.downloadRoseString = function(){
   	console.log($scope.imageData);
   };

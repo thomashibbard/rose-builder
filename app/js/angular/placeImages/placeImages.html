@@ -27,6 +27,7 @@
 				<h6>Images to Place</h6>
 				<button class="u-full-width thin-button"
 								ng-repeat="image in imageData.dataBySize"
+								ng-if="image.useImage"
 								ng-class="{'active-image-button': image.placeholderShown}"
 					    	ng-click="placeImageSelectFileName($index)">
 					<span>
@@ -37,12 +38,13 @@
 		</div>
 		<div class="two columns">&nbsp;</div>
 		<div class="six columns place-image-canvas-container">
-			<div ng-repeat="image in imageData.dataBySize" 
+			<div draggable-image
+			     ng-repeat="image in imageData.dataBySize"
+			     ng-if="image.useImage" 
 					 ng-show="image.placeholderShown"
 					 ng-class="{'hide-bg-image': backgroundImageFlag, 'hide-placeholder-border': placeholderBorderFlag}"
 					 ng-style="{width: image.width, height: image.height, top: image.top, left: image.left}"
-					 ng-mousedown="downInit($event, $index)"
-					 ng-mousemove="_move_elem($event)"		 
+	 
 					 class="place-image-placeholder"
 					 style="background-image: url(./images/{{image.fileName}});">
 				<div class="filename-container"
@@ -54,7 +56,6 @@
 			<img class="place-image-canvas"
 			 		 src="{{imageData.config.staticImagePath}}"
 			 		 ng-class="{'hide-saturation': hideSaturationFlag}" />
-		
 		</div>
 	</div>
 	<div class="row">

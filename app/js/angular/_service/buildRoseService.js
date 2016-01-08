@@ -1,4 +1,4 @@
 angular.module('boilerplateApp')
-  .service(function($http){
-
+  .service('BuildRose', function($http){
+    
   });

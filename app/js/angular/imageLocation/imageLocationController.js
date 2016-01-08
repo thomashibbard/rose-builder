@@ -36,8 +36,9 @@ angular.module('boilerplateApp')
 				.then(function(response){
 					var dataBySize = response.data.result;
 					dataBySize.forEach(function(datum){
-						datum.top = null;
-						datum.left = null;
+						datum.top = 0;
+						datum.left = 0;
+						datum.currentlyMoving = false;
 					});
 					$scope.imageData.dataBySize = response.data.result;
 					$location.path('/imageData/');

@@ -54,8 +54,6 @@ var fs = require('fs-extra')
 			if (err){
 				console.log('error', err);
 			}else{
-			
-
 
 				data1 = beautify(data1, { 
 					indent_size: 4,

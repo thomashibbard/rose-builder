@@ -32,22 +32,22 @@ angular.module('boilerplateApp')
           },
           dataBySize: [] 
         },
-        setSelectedSize: function(index){
-
-          //this.config.sizes.selectedSize = this.config.sizes.sizesArr[index];
+        setImagePosition: function(index, top, left){
+          console.log(this.imageData);
+          this.imageData.dataBySize[index].top = top + "px";
+          this.imageData.dataBySize[index].left = left + "px";
+          console.log(this.imageData);
         },
-        setIsMoving: function(index) {
-          this.imageData.forEach(function(datum) {
-            datum.isMoving = false;
+        setCurrentlyMoving: function(index){
+          this.imageData.dataBySize.forEach(function(datum){
+            datum.currentlyMoving = false;
           });
-          this.imageData.sizes[index].isMoving = true;
+          this.imageData.dataBySize[index].currentlyMoving = true;
         },
-        setIsUsed: function(index) {
-          this.imageData.forEach(function(datum) {
-            datum.isUsed = false;
+        getCurrentlyMovingIndex: function(){
+          return _.findIndex(this.imageData.dataBySize, function(datum){
+            return datum.currentlyMoving == true;
           });
-          this.imageData.sizes[index].isUsed = true;
         }
-      };
+      }
   });
-
