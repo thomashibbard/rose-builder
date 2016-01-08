@@ -7,7 +7,7 @@ angular.module('boilerplateApp')
 				url: 'http://localhost:8888/process/' + urlParams
 
 			}).then(function namedSuccess(response){
-				console.log('service', response)
+				console.log('service', response);
 				return response;
 			}, function namedError(response){
 				console.log('error', response);

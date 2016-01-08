@@ -57,7 +57,8 @@ app.post('/getImageData/', cors(corsOptions), function(req, res, next){
   });
 });
 
-app.post('/generateRosetta/', cors(corsOptions), function(req, res, next){
+app.post('/buildRosetta/', cors(corsOptions), function(req, res, next){
+  console.log(req.body)
 	var imageData = req.body;
 	components.generateRosetta(imageData, function(err, data){
 		console.log(data);
@@ -67,7 +68,7 @@ app.post('/generateRosetta/', cors(corsOptions), function(req, res, next){
 
 
 app.use('/userUploadedImages', serveindex('userUploadedImages', {'icons': true}));
-app.use('/port', serveindex('userUploadedImages', {'icons': true}));
+//app.use('/port', serveindex('userUploadedImages', {'icons': true}));
 
 
 

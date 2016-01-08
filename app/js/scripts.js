@@ -12,7 +12,7 @@ $(function(){
 		}).done(function(data){
 			console.log('data', data);
 		}).fail(function(err){
-			console.log('faile', err)
+			console.log('faile', err);
 		});
 	});
 

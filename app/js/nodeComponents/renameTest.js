@@ -16,11 +16,11 @@ fs.readdir(srcDir, function(err, files){
 		if (!visRe.test(file) && imgRe.test(file)){
 			oldName = path.join(srcDir, file);
 			ext = file.match(extRe)[0];
-			file = file.replace(ext, '')
+			file = file.replace(ext, '');
 			newName = path.join(srcDir, prefix + file + suffix + ext);
 			fs.rename(oldName, newName, function(err){
 				if(err){
-					console.log('error renaming', err)
+					console.log('error renaming', err);
 				}else{
 					console.log('renamed from', oldName, 'to', newName);	
 				}

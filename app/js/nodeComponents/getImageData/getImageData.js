@@ -10,7 +10,7 @@ console.log('in node', srcDir);
 async.waterfall([
 	function(callback){
 
-		var imageRe = /^(.*?)\.(jpg|png|bmp|gif)$/
+		var imageRe = /^(.*?)\.(jpg|png|bmp|gif)$/;
 		fs.readdir(srcDir, function(err, files){
 			if (err){
 				console.log('error reading directory', err);
@@ -25,7 +25,7 @@ async.waterfall([
 	},
 	function(files, callback){
 		var imageData = [];
-		var filePath = ''
+		var filePath = '';
 		async.each(files, function(file, cb){
 			filePath = path.join(srcDir, file);
 			sizeOf(filePath, function(err, imageDatum){
@@ -47,7 +47,7 @@ async.waterfall([
 			}else{
 				callback(null, imageData);
 			}
-		})
+		});
 	}], cb);
 };
 

@@ -51,8 +51,8 @@ angular.module('boilerplateApp')
         },
         getCurrentlyMovingIndex: function(){
           return _.findIndex(this.imageData.dataBySize, function(datum){
-            return datum.currentlyMoving == true;
+            return datum.currentlyMoving === true;
           });
         }
-      }
+      };
   });

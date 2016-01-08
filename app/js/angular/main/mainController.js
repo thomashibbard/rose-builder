@@ -11,7 +11,7 @@ angular.module('boilerplateApp')
 		$rootScope.helpers = {};
 		$rootScope.helpers.resetHeight = function(){
 
-		}
+		};
 
     $scope.$on(
       "$locationChangeSuccess",
@@ -30,7 +30,7 @@ angular.module('boilerplateApp')
 			    var $container = jQuery('.container')
 			    	, $main = jQuery('#main')
 			    	, containerHeight = parseInt($container.css('height'), 10)
-			    	, mainHeight = parseInt($main.css('height'), 10)
+			    	, mainHeight = parseInt($main.css('height'), 10);
 			    $container.css('height', containerHeight + 350 + 'px');
 			}
 			jQuery('body, html, .container').scrollTop(-100);

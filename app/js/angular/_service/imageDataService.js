@@ -4,7 +4,6 @@ angular.module('boilerplateApp')
      return  $http.post('./getImageData/', {directory: imageDirectory})
         .then(function(response){
           return response;
-          console.log('success');
         }, function(response){
           return response;
         }

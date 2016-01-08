@@ -34,7 +34,7 @@ var bgScale	= 'cover';
 			
 		}, 
 		function(imageFiles, callback){
-			var i = 0
+			var i = 0;
 			async.each(imageFiles, function(imageFile, cb){
 				imageDir = path.join(sourceDir, imageFile);
 				
@@ -57,7 +57,7 @@ var bgScale	= 'cover';
 				});
 			}, function(){
 				callback(null, imageFiles);
-			})
+			});
 
 		},
 		function(imageFiles, callback){

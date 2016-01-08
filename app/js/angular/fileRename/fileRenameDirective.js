@@ -4,4 +4,4 @@ angular.module('boilerplateApp')
 			restrict: 'EA',
 			templateUrl: './app/js/angular/fileRename/fileRename.html'
 		};
-	})
+	});

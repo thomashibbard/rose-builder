@@ -17,7 +17,7 @@ angular.module('boilerplateApp')
 		$scope.toggleImageBatchAll = function(){
 			var allBatchOn = $scope.imageData.dataBySize.every(function(image){
 				return image.inBatch;
-			})
+			});
 			if (allBatchOn){
 				$scope.imageData.dataBySize.forEach(function(image){
 					image.inBatch = false;

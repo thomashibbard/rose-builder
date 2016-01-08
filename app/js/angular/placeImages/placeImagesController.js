@@ -1,5 +1,5 @@
 angular.module('boilerplateApp')
-	.controller('placeImagesCtrl', function($scope, $rootScope, $http, $location, $document, ImageDataFactory){
+	.controller('placeImagesCtrl', function($scope, $rootScope, $http, $location, $document, ImageDataFactory, BuildRosettaService){
 
 		//    /Users/thibbard/Documents/repos/projects/rose-builder/images
 
@@ -10,7 +10,7 @@ angular.module('boilerplateApp')
 			$scope.imageData = ImageDataFactory.imageData = JSON.parse(localStorage.getItem('imageData'));
 		}
 
-		$scope.imageData = JSON.parse(localStorage.getItem('imageData'))
+		$scope.imageData = JSON.parse(localStorage.getItem('imageData'));
 		
 		$scope.imageData.dataBySize.forEach(function(datum, index){
 		  if (index === 0){
@@ -52,7 +52,7 @@ angular.module('boilerplateApp')
 		$scope.placeImageSelectFileName = function(index){
 			$scope.showPlaceholder(index);
 			ImageDataFactory.setCurrentlyMoving(index);
-		}
+		};
 		$scope.getCurrentlyMoving = function(){
 			return $scope.imageData.dataBySize.filter(function(datum){
 					return datum.currentlyMoving === true;
@@ -66,64 +66,18 @@ angular.module('boilerplateApp')
 		};
 		$scope.getCurrentlyMovingIndex = function(){
 			return _.findIndex($scope.imageData.dataBySize, function(datum){
-				return datum.currentlyMoving == true;
+				return datum.currentlyMoving === true;
 		});
 	};
 
-/*
-	var selected = null, formerSelected = null// Object of the element to be moved
-	  x_pos = 0,
-	  y_pos = 0, // Stores x & y coordinates of the mouse pointer
-	  x_elem = 0,
-	  y_elem = 0; // Stores top, left values (edge) of the element
 
-	// Will be called when user starts dragging an element
-	function _drag_init(elem) {
-	  // Store the object of the element which needs to be moved
-	  selected = elem;
-
-	  x_elem = x_pos - selected.offsetLeft;
-	  y_elem = y_pos - selected.offsetTop;
-	}
-	$scope.downInit = function(el, index){
-		$scope.setCurrentlyMoving(index);
-    _drag_init(el.target);
-    return false;
-	};
-
-	// Will be called when user dragging an element
-	$scope._move_elem = function(e) {
-		//console.log(e.target)
-	  x_pos = document.all ? window.event.clientX : e.pageX;
-	  y_pos = document.all ? window.event.clientY : e.pageY;
-
-	  if (selected !== null) {
-	    selected.style.left = (x_pos - x_elem) + 'px';
-	    selected.style.top = (y_pos - y_elem) + 'px';
-	  }
-	};
-
-	// Destroy the object when we are done
-	$scope._destroy = function(currentlyMoving) {
-		if (selected) {
-			//set  position properties to $scope.imageData.dataBySize
-			//do this on destroy so that _move_elem only sets the one property
-			//as of now, it is not throttled, so it could potentially get too
-			//heavy and laggy if to much is done there
-			currentlyMoving.top = parseInt(selected.style.top, 10);
-			currentlyMoving.left = parseInt(selected.style.left, 10);
-			//TODO use this for undos/arrow keypresses etc.
-			formerSelected = selected;
-		  selected = null;
-		}
-	};*/
 	$scope.getImageSize = function(currentlyMoving, target){
 		currentlyMoving.alteredWidth = target.style.width;
 		currentlyMoving.alteredHeight = target.style.height;
 	};
 
 	$scope.placeholderMouseup = function(e){
-		var currentlyMoving = $scope.getCurrentlyMoving();
+		var currentlyMoving = ImageDataFactory.getCurrentlyMovingIndex();
 		$scope.getImageSize(currentlyMoving, e.target);
 		//$scope._destroy(currentlyMoving);
 	};
@@ -156,9 +110,6 @@ angular.module('boilerplateApp')
 					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].top, 10);
 					$scope.imageData.dataBySize[currentlyMovingIndex].top = tempCoord += increment;
 					break;
-				default:
-					console.log($scope.imageData.dataBySize[currentlyMovingIndex]);
-					break;
 			}
 			$scope.$apply();
   	}
@@ -170,13 +121,16 @@ angular.module('boilerplateApp')
   		$location.path('/');
   	}
   };
-  $scope.downloadRoseString = function(){
-  	console.log($scope.imageData);
+  $scope.downloadRosetta = function(){
+  	console.log('here');
+  	BuildRosettaService.buildSingleObject(JSON.stringify($scope.imageData))
+  		.then(function(response){
+  			console.log('success', response);
+  		}, function(response){
+  			console.log('error!', response);
+  		}
+  	);
   };
-
-/*  $scope.test = function(){
-  	console.log($scope.imageData);
-  };*/
 
 });
 

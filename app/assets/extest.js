@@ -17,7 +17,7 @@ var express = require('express')
 	app.get('/expressTest', function(req, res){
 		res.json({'err path?': path.dirname(require.main.filename)});
 		                         
-		console.log(__dirname)
+		console.log(__dirname);
 	});
 
 	app.listen(PORT);

@@ -3,33 +3,15 @@ angular.module('boilerplateApp')
 
 		$scope.imageData = ImageDataFactory.imageData;
 
-		$scope.bgScale = "cover"
+		$scope.bgScale = "cover";
 		$scope.directoryType = "size";
 		$scope.urlParams = $scope.bgScale + '/' + $scope.directoryType;
 		//$scope.imageLocation = '/Users/thibbard/Documents/repos/projects/rose-builder/images';
 
-/*		$scope.submitRosetta = function(){
-
-			$scope.rosettaData = GenerateBoilerplate.getBoilerplateElement($scope.urlParams);
-			console.log('r', $scope.rosettaData);
-		};*/
-
-/*		$scope.downloadFile = function($event){
-			document.getElementById('downloadFile').click();
-		};
-		$scope.clickFileInput = function(){
-			//alert('test');
-			angular.element('#src-dir-select').click();
-		};*/
-
-/*		$scope.fileNameChanged = function(e){
-			console.log(e.target.files[1])
-		};*/
-
 		$scope.selectedSize = false;
 		$scope.selectSize = function(index){
 			$scope.selectedSize = $scope.sizes[index];
-		}
+		};
 
 		$scope.getImageDataFromDirectory = function(){
 			ImageDataService.GetImageDataFromDirectory($scope.imageData.config.imageDirectory)

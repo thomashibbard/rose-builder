@@ -1,7 +1,8 @@
 var fs = require('fs-extra')
 	, path = require('path')
 	, async = require('async')
-	, beautify = require('js-beautify').js_beautify;
+	, beautify = require('js-beautify').js_beautify
+	, util = require('util');
 
 		var objStr = ''
 			, batch = {}
@@ -21,13 +22,14 @@ var fs = require('fs-extra')
 			batch.success = '.success(function(){/*success callback*/})';
 			batch.fail = '.fail(function(){/*error callback*/})';
 			batch.render = '.render();';
-	var generateRosetta = function(imageData, callback){
-		imageData = imageData.imageData;
-
+	var buildSingleObject = function(imageData, callback){
+		var dataBySize = imageData.dataBySize;
+		//console.log(util.inspect(imageData, {showHidden: false, depth: null}));
+		//console.dir(imageData, {depth:null});
 		async.waterfall([
 			function(callback){
 
-				async.each(imageData, function(imageFile, cb){
+				async.each(imageData.dataBySize, function(imageFile, cb){
 					imageFile.varName = imageFile.fileName.match(/(^.*?)\..*?$/)[1];
 					objStr += 'var ' + imageFile.varName + ' = R.create("div").set({css: {top: 0, left: 0, width: ' + imageFile.width + ', height: ' + imageFile.height + ', backgroundImage: "' + imageFile.fileName + '", cursor: "pointer", opacity: 1, backgroundScale: "' + bgScale + '"}, attr: {id: "' + varName + '"}, rosetta: {parentNode: stage, directoryType: "' + dirType + '"}}).render();\n\n';
 					cb();
@@ -65,7 +67,7 @@ var fs = require('fs-extra')
 				});
 				console.log(data2);
 			}
-		})	
+		});
 	};
 
-	module.exports = exports = generateRosetta;
+	module.exports = exports = buildSingleObject;

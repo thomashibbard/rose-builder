@@ -5,16 +5,15 @@
 		, cssmin = require('gulp-minify-css')
 		, sequence = require('run-sequence')
 		, wiredep = require('wiredep').stream
-		, shell = require('gulp-shell')
 		, open = require('gulp-open')
 		, connect = require('gulp-connect')
 		, concat = require('gulp-concat')
 		, uglify = require('gulp-uglify')
 		, rename = require('gulp-rename')
-		//, webpack = require('webpack');
 		, angularFilesort = require('gulp-angular-filesort')
-		//, exec = require('child_process').exec
-		, jshint = require('jshint');
+		, jshint = require('gulp-jshint')
+		, stylish = require('jshint-stylish')
+		, util = require('util');
 
 	var filesToInject = [
 		'./app/**/*.js', 
@@ -112,12 +111,16 @@
 		sequence('connect', 'browser-open', callback);
 	});
 
+gulp.task('hint', function(){
+  return gulp.src('./app/**/*.js')
+    .pipe(jshint({laxcomma: true}))
+    .pipe(jshint.reporter(stylish));
+});
 
 
 
-	function js(shouldMinify){
-		
-	}
+
+
 
 
 

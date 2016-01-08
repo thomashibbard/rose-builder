@@ -1,5 +1,6 @@
 angular.module('boilerplateApp')
 .directive('draggableImage', ['$document', 'ImageDataFactory', function($document, ImageDataFactory) {
+  /*thanks to angular API for this draggable logic!*/
   return {
     restrict: 'A',
     link: function(scope, element, attr) {
@@ -28,7 +29,6 @@ angular.module('boilerplateApp')
         var left = parseInt(window.getComputedStyle(element[0]).left, 10);
         ImageDataFactory.setImagePosition(scope.$index, top, left);
         ImageDataFactory.setCurrentlyMoving(scope.$index);
-        console.log(ImageDataFactory.imageData);
         $document.off('mousemove', mousemove);
         $document.off('mouseup', mouseup);
       }
