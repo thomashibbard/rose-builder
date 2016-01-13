@@ -37,6 +37,7 @@ async.waterfall([
 					imageDatum.isRequired = false; 	//TODO move to angular controller
 					imageDatum.useImage = true; 	//TODO move to angular controller
 					imageData.push(imageDatum);
+					console.log('file', file)
 					cb();
 				}
 			});

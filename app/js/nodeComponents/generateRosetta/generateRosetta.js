@@ -4,7 +4,8 @@ var fs = require('fs-extra')
 	, beautify = require('js-beautify').js_beautify
 	, util = require('util');
 
-		var objStr = ''
+		var writeFileFullPath =  'http://localhost:8888/rosettaFiles/test.js'
+			, objStr = ''
 			, batch = {}
 			, finalBatchStr
 			, varNameRe = /(^.*?)\..*?$/
@@ -23,15 +24,26 @@ var fs = require('fs-extra')
 			batch.fail = '.fail(function(){/*error callback*/})';
 			batch.render = '.render();';
 	var buildSingleObject = function(imageData, callback){
-		var dataBySize = imageData.dataBySize;
-		//console.log(util.inspect(imageData, {showHidden: false, depth: null}));
-		//console.dir(imageData, {depth:null});
+		//imageData = JSON.parse(imageData);
+		//var dataBySize = imageData.dataBySize;
+		objStr += '/* ROSETTA OBJECTS FOR ' + imageData.config.sizes.selectedSize.plainText + ' BANNER*/\n\n';
 		async.waterfall([
 			function(callback){
-
+				//filter out unused images
+				async.filter(imageData.dataBySize, function(datum, cb){
+					cb(datum.useImage);
+				}, function(filteredDataBySize){
+						imageData.dataBySize = filteredDataBySize;
+						callback(null, imageData);
+				})
+			},
+			function(imageData, callback){
+				//build R.create strings
 				async.each(imageData.dataBySize, function(imageFile, cb){
-					imageFile.varName = imageFile.fileName.match(/(^.*?)\..*?$/)[1];
-					objStr += 'var ' + imageFile.varName + ' = R.create("div").set({css: {top: 0, left: 0, width: ' + imageFile.width + ', height: ' + imageFile.height + ', backgroundImage: "' + imageFile.fileName + '", cursor: "pointer", opacity: 1, backgroundScale: "' + bgScale + '"}, attr: {id: "' + varName + '"}, rosetta: {parentNode: stage, directoryType: "' + dirType + '"}}).render();\n\n';
+					imageFile.varName = imageFile.fileName.match(/(^.*?)\..*?$/)[1].replace(/-/g, '_');
+					console.log(imageFile.varName);
+					objStr += 'var ' + imageFile.varName + ' = R.create("div").set({css: {top: ' + imageFile.top + ', left: ' + imageFile.left + ', width: ' + imageFile.width + ', height: ' + imageFile.height + ', backgroundImage: "' + imageFile.fileName + '", cursor: "pointer", opacity: 1, backgroundScale: "' + bgScale + '"}, attr: {id: "' + imageFile.varName + '"}, rosetta: {parentNode: stage, directoryType: "' + dirType + '"}}).render();\n\n';
+					console.log('var ' + imageFile.varName + ' = R.create("div").set({css: {top: ')
 					cb();
 				}, function(){
 					callback(null, objStr);
@@ -39,7 +51,8 @@ var fs = require('fs-extra')
 				
 			},
 			function(objStr, callback){
-				async.each(imageData, function(imageFile, cb){
+				//build R.add("batch") strings
+				async.each(imageData.dataBySize, function(imageFile, cb){
 					if (imageFile.inBatch){
 						batch.add.push(imageFile.varName);
 					}
@@ -65,7 +78,16 @@ var fs = require('fs-extra')
 					indent_size: 2,
 					preserve_newlines: true 
 				});
-				console.log(data2);
+				var writePath = path.join('/' + path.relative('/', '.'), 'public/rosettaFiles/rosettaFile.js');
+				var hardcodedPath = '/Users/thibbard/Documents/repos/projects/rose-builder/public/rosettaFiles/rosettaFile.js';
+				fs.writeFile(writePath, data1 + '\n\n' + data2, function(err){
+					console.log('DIR', writePath);
+					if (err){
+						console.log('write file error', err);
+					}else{
+						console.log('file written at', writeFileFullPath);
+					}
+				})
 			}
 		});
 	};

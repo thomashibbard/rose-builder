@@ -6,8 +6,10 @@ angular.module('boilerplateApp')
 		if (ImageDataFactory.imageData.dataBySize.length > 0){
 			$scope.imageData = ImageDataFactory.imageData;
 			localStorage.setItem('imageData', JSON.stringify($scope.imageData));
+      debugger;
 		}else{
 			$scope.imageData = ImageDataFactory.imageData = JSON.parse(localStorage.getItem('imageData'));
+      debugger;
 		}
 
 		$scope.imageData = JSON.parse(localStorage.getItem('imageData'));
@@ -122,8 +124,8 @@ angular.module('boilerplateApp')
   	}
   };
   $scope.downloadRosetta = function(){
-  	console.log('here');
-  	BuildRosettaService.buildSingleObject(JSON.stringify($scope.imageData))
+  	$scope.imageData = JSON.parse(angular.toJson($scope.imageData)); //remove angular $$keys from object
+  	BuildRosettaService.buildSingleObject($scope.imageData)
   		.then(function(response){
   			console.log('success', response);
   		}, function(response){

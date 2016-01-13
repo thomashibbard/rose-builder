@@ -35,6 +35,8 @@ var corsOptions = {
 
 app.use(express.static(__dirname));
 
+app.use(servestatic(__dirname + '/public'));
+app.use('/rosettaFiles', serveindex('./rosettaFiles', {'icons': true}));
 
 app.get('/process/:bgScale/:dirType/', cors(corsOptions), function(req, res, next){
 	components.boilerplateRosettaObj(req.params, function(err, data){
@@ -58,7 +60,7 @@ app.post('/getImageData/', cors(corsOptions), function(req, res, next){
 });
 
 app.post('/buildRosetta/', cors(corsOptions), function(req, res, next){
-  console.log(req.body)
+  //console.log(req.body)
 	var imageData = req.body;
 	components.generateRosetta(imageData, function(err, data){
 		console.log(data);
