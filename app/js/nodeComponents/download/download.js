@@ -2,7 +2,7 @@ var fs = require('fs');
 var request = require('request');
 
 var download = function(url, dest, cb) {
-  console.log(url, '\n', dest)
+  console.log('in download function url:', url, '\ndest:', dest)
   var file = fs.createWriteStream(dest);
   var sendReq = request.get(url);
 
@@ -36,4 +36,4 @@ var download = function(url, dest, cb) {
   });
 };
 
-module.exports = exports = download;
+  module.exports = exports = download;

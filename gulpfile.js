@@ -13,7 +13,9 @@
 		, angularFilesort = require('gulp-angular-filesort')
 		, jshint = require('gulp-jshint')
 		, stylish = require('jshint-stylish')
-		, util = require('util');
+		, util = require('util')
+		, shell = require('gulp-shell')
+		, plugins = require('gulp-load-plugins')();;
 
 	var filesToInject = [
 		'./app/**/*.js', 
@@ -91,14 +93,19 @@
 	});
 
 	/* opens the chrome browser to the location of the static server */
-	gulp.task('browser-open', false, function () {
-	    var options = {
-	        url : "localhost:8888/",
-	        app : "Google Chrome"
-	    };
-	    return gulp.src('localhost:8888/index.html')
-	        .pipe(open("", options));
-	});
+
+/*	gulp.task('open', function(){
+	  gulp.src('http://0.0.0.0:8888/')
+	  .pipe(open());
+		gulp.src('')
+		.pipe(open({app: 'google-chrome', uri: './index.html'}));	  
+	});*/
+gulp.task('open', function(){
+  gulp.src('')
+  .pipe(open({app: 'google chrome', uri:'http://0.0.0.0:8888/'}));
+});
+
+
 
 	gulp.task('connect', function () {
 	    return connect.server({

@@ -6,8 +6,8 @@
 #other
 http
 http:
-/images
-/images/*
+#/images
+#/images/*
 /imagesArchive/*
 /uploadedStaticImages
 /exportedRosetta/*.js

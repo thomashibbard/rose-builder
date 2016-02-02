@@ -6,10 +6,8 @@ angular.module('boilerplateApp')
 		if (ImageDataFactory.imageData.dataBySize.length > 0){
 			$scope.imageData = ImageDataFactory.imageData;
 			localStorage.setItem('imageData', JSON.stringify($scope.imageData));
-      debugger;
 		}else{
 			$scope.imageData = ImageDataFactory.imageData = JSON.parse(localStorage.getItem('imageData'));
-      debugger;
 		}
 
 		$scope.imageData = JSON.parse(localStorage.getItem('imageData'));
