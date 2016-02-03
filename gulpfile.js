@@ -1,5 +1,6 @@
 	var gulp = require('gulp')
 		, fs = require('fs-extra')
+		, chalk = require('chalk')
 		, inject = require('gulp-inject')
 		, sass = require('gulp-ruby-sass')
 		, cssmin = require('gulp-minify-css')
@@ -17,34 +18,16 @@
 		, shell = require('gulp-shell')
 		, plugins = require('gulp-load-plugins')();;
 
+const PORT = '8888';
+
 	var filesToInject = [
 		'./app/**/*.js', 
 		'./app/**/*.css'
 	];
 
 	gulp.task('default', function(){
-		console.log('ROSETTA BOILERPLATE'.red.bold);
+		console.log(chalk.white.bgRed('\n\n ROSETTA BOILERPLATE\n'));
 	});
-
-	/*gulp.task('wiredep', function(cb){
-	  gulp.src('./index.html')
-	    .pipe(wiredep())
-	    .pipe(gulp.dest('.'));
-	    //console.log('done running wire'.green.bold)
-	});*/
-
-	//custom JavaScript and CSS
-	/*gulp.task('inject', function (){
-	  var target = gulp.src('./index.html');
-	  var sources = gulp.src(filesToInject, {read: false});
-	  return target.pipe(inject(sources))
-	    .pipe(gulp.dest('.'));
-	});
-	*/
-	/*gulp.task('wire',  function(callback){
-		sequence('wiredep', 'inject', callback);
-	});*/
-
 
 	gulp.task('wire', function(){
 	  gulp.src('./index.html')
@@ -86,52 +69,35 @@
 	});
 
 
-	gulp.task('start-server', false, function(callback){
-		exec('node server.js', function(){
-			callback();
-		});
+	gulp.task('hint', function(){
+	  return gulp.src('./app/**/*.js')
+	    .pipe(jshint({laxcomma: true}))
+	    .pipe(jshint.reporter(stylish));
 	});
 
-	/* opens the chrome browser to the location of the static server */
 
-/*	gulp.task('open', function(){
-	  gulp.src('http://0.0.0.0:8888/')
-	  .pipe(open());
-		gulp.src('')
-		.pipe(open({app: 'google-chrome', uri: './index.html'}));	  
-	});*/
-	gulp.task('open', function(){
-	  gulp.src('')
-	  .pipe(open({app: 'google chrome', uri:'http://google.com/'}));
+
+	/* launch app in browser */
+
+	//start node server
+	gulp.task('start-server', false, plugins.shell.task([
+    'node ' + 'server.js'
+	]));
+
+	//open browser
+	gulp.task('browser-open', false, function () {
+	    var options = {
+	        url: 'http://0.0.0.0:' + PORT + '/',
+	        app: 'Google Chrome'
+	    };
+	    return gulp.src('./index.html')
+	        .pipe(plugins.open('', options));
 	});
 
-gulp.task('browser-open', false, function () {
-    var options = {
-        url : "http://0.0.0.0:8888/",
-        app : "Google Chrome"
-    };
-    return gulp.src('./index.html')
-        .pipe(plugins.open('', options));
-});
-
-	gulp.task('connect', function () {
-	    return connect.server({
-	        root: ".server.js",
-	        port: '8888'
-	    });
-	});
 
 	gulp.task('launch', function(callback){
-		sequence('connect', 'browser-open', callback);
+		sequence(['start-server', 'browser-open'], callback);
 	});
-
-gulp.task('hint', function(){
-  return gulp.src('./app/**/*.js')
-    .pipe(jshint({laxcomma: true}))
-    .pipe(jshint.reporter(stylish));
-});
-
-
 
 
 
