@@ -28,13 +28,14 @@ angular.module('boilerplateApp')
         var top = parseInt(window.getComputedStyle(element[0]).top, 10);
         var left = parseInt(window.getComputedStyle(element[0]).left, 10);
         ImageDataFactory.setImagePosition(scope.$index, top, left);
+        console.log(top, left);
         ImageDataFactory.setCurrentlyMoving(scope.$index);
+
         $document.off('mousemove', mousemove);
         $document.off('mouseup', mouseup);
+        scope.$apply();
       }
     }
-
-
 
   };
 }]);

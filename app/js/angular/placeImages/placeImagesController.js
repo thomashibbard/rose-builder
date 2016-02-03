@@ -7,7 +7,9 @@ angular.module('boilerplateApp')
 			$scope.imageData = ImageDataFactory.imageData;
 			localStorage.setItem('imageData', JSON.stringify($scope.imageData));
 		}else{
+      console.log('from local storage')
 			$scope.imageData = ImageDataFactory.imageData = JSON.parse(localStorage.getItem('imageData'));
+      ImageDataFactory.imageData = $scope.imageData;
 		}
 
 		$scope.imageData = JSON.parse(localStorage.getItem('imageData'));
@@ -111,6 +113,7 @@ angular.module('boilerplateApp')
 					$scope.imageData.dataBySize[currentlyMovingIndex].top = tempCoord += increment;
 					break;
 			}
+      console.log('top', ImageDataFactory.imageData.dataBySize[currentlyMovingIndex].top);
 			$scope.$apply();
   	}
   });

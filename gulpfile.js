@@ -100,12 +100,19 @@
 		gulp.src('')
 		.pipe(open({app: 'google-chrome', uri: './index.html'}));	  
 	});*/
-gulp.task('open', function(){
-  gulp.src('')
-  .pipe(open({app: 'google chrome', uri:'http://0.0.0.0:8888/'}));
+	gulp.task('open', function(){
+	  gulp.src('')
+	  .pipe(open({app: 'google chrome', uri:'http://google.com/'}));
+	});
+
+gulp.task('browser-open', false, function () {
+    var options = {
+        url : "http://0.0.0.0:8888/",
+        app : "Google Chrome"
+    };
+    return gulp.src('./index.html')
+        .pipe(plugins.open('', options));
 });
-
-
 
 	gulp.task('connect', function () {
 	    return connect.server({
