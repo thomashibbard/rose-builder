@@ -26,7 +26,7 @@ const PORT = '8888';
 	];
 
 	gulp.task('default', function(){
-		console.log(chalk.white.bgRed('\n\n ROSETTA BOILERPLATE\n'));
+		console.log(chalk.magenta(gulpSplashStr));
 	});
 
 	gulp.task('wire', function(){
@@ -100,10 +100,12 @@ const PORT = '8888';
 	});
 
 
-
-
-
-
+};
+var gulpSplashStr =          chalk.blue('┌────────────────────────────────────────────────┐\n')
++ chalk.blue('│') + chalk.magenta(' Rose Builder (v 0.0.1)                         ') + chalk.blue('│\n')
++ chalk.blue('│') + chalk.magenta(' Run npm install && bower install to get deps   ') + chalk.blue('│\n')
++ chalk.blue('│') + chalk.magenta(' Run npm launch to run in browser               ') + chalk.blue('│\n')
++ chalk.blue('└────────────────────────────────────────────────┘');
 
 
 

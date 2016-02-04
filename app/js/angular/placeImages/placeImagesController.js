@@ -6,6 +6,7 @@ angular.module('boilerplateApp')
 		if (ImageDataFactory.imageData.dataBySize.length > 0){
 			$scope.imageData = ImageDataFactory.imageData;
 			localStorage.setItem('imageData', JSON.stringify($scope.imageData));
+      console.log('from newly uploaded images')
 		}else{
       console.log('from local storage')
 			$scope.imageData = ImageDataFactory.imageData = JSON.parse(localStorage.getItem('imageData'));
@@ -98,22 +99,23 @@ angular.module('boilerplateApp')
 			switch (event.which){
 				case 37: //left
 					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].left, 10);
-					$scope.imageData.dataBySize[currentlyMovingIndex].left = tempCoord -= increment;
+					ImageDataFactory.setImagePosition(currentlyMovingIndex, false, tempCoord -= increment);
 					break;
 				case 38: //top
 					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].top, 10);
-					$scope.imageData.dataBySize[currentlyMovingIndex].top = tempCoord -= increment;
+          ImageDataFactory.setImagePosition(currentlyMovingIndex, tempCoord -= increment,null);
 					break;
 				case 39: //right
 					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].left, 10);
-					$scope.imageData.dataBySize[currentlyMovingIndex].left = tempCoord += increment;
+          ImageDataFactory.setImagePosition(currentlyMovingIndex, false, tempCoord += increment);
 					break;
 				case 40:  //down
 					tempCoord = parseInt($scope.imageData.dataBySize[currentlyMovingIndex].top, 10);
-					$scope.imageData.dataBySize[currentlyMovingIndex].top = tempCoord += increment;
+          ImageDataFactory.setImagePosition(currentlyMovingIndex, tempCoord += increment, false);
 					break;
 			}
-      console.log('top', ImageDataFactory.imageData.dataBySize[currentlyMovingIndex].top);
+      console.log('top', ImageDataFactory.imageData.dataBySize[currentlyMovingIndex].top, 
+        'left', ImageDataFactory.imageData.dataBySize[currentlyMovingIndex].left);
 			$scope.$apply();
   	}
   });

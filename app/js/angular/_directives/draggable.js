@@ -9,8 +9,12 @@ angular.module('boilerplateApp')
       element.on('mousedown', function(event) {
         // Prevent default dragging of selected content
         event.preventDefault();
-        startX = event.pageX - x;
-        startY = event.pageY - y;
+        var currentlyMovingIndex = ImageDataFactory.getCurrentlyMovingIndex();
+        console.log(ImageDataFactory.imageData.dataBySize[currentlyMovingIndex].left,
+                    ImageDataFactory.imageData.dataBySize[currentlyMovingIndex].top );
+        startX = event.pageX - ImageDataFactory.imageData.dataBySize[currentlyMovingIndex].left;
+        startY = event.pageY - ImageDataFactory.imageData.dataBySize[currentlyMovingIndex].top;
+        console.log(event.pageX);
         $document.on('mousemove', mousemove);
         $document.on('mouseup', mouseup);
       });

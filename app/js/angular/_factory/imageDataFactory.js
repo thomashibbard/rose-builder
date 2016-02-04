@@ -40,8 +40,11 @@ angular.module('boilerplateApp')
           if (left){
             this.imageData.dataBySize[index].left = left;
           }
-          console.log(this.imageData);
+          console.log('FACTORY >>', this.imageData.dataBySize.filter(datum => datum.currentlyMoving));
          // $scope.$apply();
+        },
+        getImagePosition: function(index){
+          return this.imageData.dataBySize.filter(datum => datum.currentlyMoving)
         },
         setCurrentlyMoving: function(index){
           this.imageData.dataBySize.forEach(function(datum){
@@ -49,6 +52,7 @@ angular.module('boilerplateApp')
           });
           this.imageData.dataBySize[index].currentlyMoving = true;
         },
+        
         getCurrentlyMovingIndex: function(){
           return _.findIndex(this.imageData.dataBySize, function(datum){
             return datum.currentlyMoving === true;
